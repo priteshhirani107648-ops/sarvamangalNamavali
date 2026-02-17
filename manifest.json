@@ -1,0 +1,23 @@
+{
+  "name": "શ્રી સર્વમંગલ નામાવલી",
+  "short_name": "નામાવલી",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1a0b2e",
+  "theme_color": "#FF9933",
+  "description": "Shree Sarvamangal Namavali Chanting App",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
