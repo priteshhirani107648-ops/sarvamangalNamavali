@@ -431,6 +431,66 @@ input[type=range]::-webkit-slider-thumb {
   background: rgba(255, 153, 51, 0.2);
   transform: translateY(-50%) scale(0.9);
 }
+/* SCROLL FOOTER STYLES */
+.scroll-footer {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  color: var(--text-muted);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.scroll-footer .highlight {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.scroll-footer .tech-brand {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+.tech-brand {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 8px;
+  opacity: 0.5;
+}
+.tech-brand {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 8px;
+  opacity: 0.5;
+}
+/* SETTINGS FOOTER STYLES */
+.settings-footer {
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 20px;
+  border-top: 1px solid var(--surface-border);
+  color: var(--text-muted);
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+}
+
+.settings-footer .highlight {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.settings-footer .tech-brand {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 6px;
+  opacity: 0.6;
+}
 </style>
 </head>
 
@@ -464,6 +524,8 @@ input[type=range]::-webkit-slider-thumb {
     <div class="mantra-list" id="list">
       
       <div class="spacer" id="topSpace"></div>
+
+
       <div class="orb"></div>
 
   <div class="mantra-card"><div class="index">૧. </div><div>ૐ શ્રી સ્વામિને નમઃ</div></div>
@@ -1478,7 +1540,6 @@ input[type=range]::-webkit-slider-thumb {
   </div>
   <div class="fab" id="settingsBtn">⚙️</div>
 </div>
-
 <div class="panel" id="panel">
   <div class="panel-header">Settings</div>
   
@@ -1490,6 +1551,11 @@ input[type=range]::-webkit-slider-thumb {
   <div class="setting-group">
     <label><span>Flow Speed</span> <span id="speedVal">Normal</span></label>
     <input type="range" id="speed" min="1" max="10" value="5">
+  </div>
+
+  <div class="settings-footer">
+    App by <span class="highlight">Pritesh Hirani</span>
+    <div class="tech-brand">© 2026 Hirani Tech. All rights reserved.</div>
   </div>
 </div>
 
