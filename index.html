@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ભક્તિ સંગ્રહ</title>
+
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#FF9933">
 <link rel="apple-touch-icon" href="icon-192.png">
-<title>શ્રી સર્વમંગલ નામાવલી</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +15,7 @@
 
 <style>
 :root {
-  --primary: #FF9933; /* Saffron */
+  --primary: #FF9933; 
   --primary-dark: #E67A00;
   --primary-glow: rgba(255, 153, 51, 0.4);
   
@@ -29,7 +30,6 @@
   --header-glass: rgba(26, 11, 46, 0.75);
   
   --headerH: 70px;
-  --fontScale: 1;
 }
 
 /* Light Theme Colors */
@@ -49,7 +49,7 @@ body {
   font-family: 'Hind Vadodara', 'Poppins', sans-serif;
   color: var(--text-main);
   background: linear-gradient(160deg, var(--bg1), var(--bg2), var(--bg3));
-  overflow: hidden;
+  min-height: 100vh;
   transition: background 0.4s ease, color 0.4s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -72,11 +72,10 @@ body {
   z-index: 100;
   font-size: 20px;
   font-weight: 600;
-  letter-spacing: 0.5px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* PREMIUM THEME TOGGLE */
+/* THEME TOGGLE */
 .theme-toggle {
   position: absolute;
   right: 20px;
@@ -92,7 +91,7 @@ body {
   justify-content: space-between;
   padding: 0 6px;
   box-sizing: border-box;
-  transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.4s;
 }
 
 .theme-toggle .sun { color: #ffb300; font-size: 14px; z-index: 2; }
@@ -107,324 +106,107 @@ body {
   left: 2px;
   top: 2px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 0.4s;
   z-index: 1;
 }
 
 .theme-toggle.active { background: rgba(255, 153, 51, 0.2); border-color: var(--primary); }
 .theme-toggle.active .toggle-knob { left: 32px; box-shadow: 0 2px 8px rgba(255,153,51,0.4); }
 
-/* MAIN CONTENT */
-.main { padding-top: var(--headerH); }
-
-.scroll-area {
-  height: calc(100vh - var(--headerH));
-  overflow: hidden;
-  position: relative;
-  touch-action: none;
-  mask-image: linear-gradient(to bottom, transparent, black 15%, black 80%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 80%, transparent);
+/* MAIN CONTAINER */
+.container {
+  padding: calc(var(--headerH) + 30px) 20px 40px 20px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.mantra-list { position: absolute; width: 100%; }
-.spacer { height: 0; }
-
-/* ORB ANIMATION */
-@keyframes pulse {
-  0% { box-shadow: 0 0 20px var(--primary-glow), 0 0 0 0 rgba(255, 153, 51, 0.2); transform: scale(1); }
-  50% { box-shadow: 0 0 40px var(--primary-glow), 0 0 0 20px rgba(255, 153, 51, 0); transform: scale(1.05); }
-  100% { box-shadow: 0 0 20px var(--primary-glow), 0 0 0 0 rgba(255, 153, 51, 0); transform: scale(1); }
+.greeting {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--primary), #ffc107);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.orb {
-  width: 80px;
-  height: 80px;
-  margin: 20px auto 40px auto;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ffd480, var(--primary));
-  box-shadow: 0 0 20px var(--primary-glow);
-  animation: pulse 3s infinite ease-in-out;
+.subtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 30px;
 }
 
-/* MANTRA CARDS */
-/* MANTRA CARDS */
-.mantra-card {
-  margin: 10px 20px;
-  padding: 14px 20px;
-  border-radius: 16px;
+/* CARDS GRID */
+.card-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-card {
   display: flex;
   align-items: center;
   background: var(--surface);
-  border: 1px solid transparent;
-  font-size: calc(clamp(20px, 4.5vw, 28px) * var(--fontScale));
-  font-weight: 500;
-  will-change: transform, opacity, color, background;
-  /* Removed CSS transition to stop jittering during smooth scroll */
+  border: 1px solid var(--surface-border);
+  border-radius: 20px;
+  padding: 16px 20px;
+  text-decoration: none;
+  color: var(--text-main);
+  transition: 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
 }
 
-.mantra-card.focused {
-  color: var(--primary);
-  font-weight: 600;
-  background: rgba(255, 153, 51, 0.05); /* Very subtle soft background */
-  /* Removed the harsh border and heavy drop-shadows */
+.menu-card:active {
+  transform: scale(0.97);
 }
-.index {
-  min-width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
+
+.menu-card.coming-soon {
+  opacity: 0.6;
+  pointer-events: none; /* Disables clicking */
+}
+
+.card-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 153, 51, 0.2), rgba(230, 122, 0, 0.1));
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 24px;
   margin-right: 16px;
-  font-size: 16px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  box-shadow: 0 4px 10px var(--primary-glow);
+  border: 1px solid rgba(255, 153, 51, 0.3);
 }
 
-/* BOTTOM CONTROLS */
-.controls-wrapper {
-  position: fixed;
-  bottom: 30px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 50;
-  gap: 20px;
-  pointer-events: none; /* Let clicks pass through empty space */
+.card-content {
+  flex: 1;
 }
 
-.play-main {
-  pointer-events: auto;
-  padding: 16px 36px;
-  border-radius: 50px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  cursor: pointer;
-  box-shadow: 0 8px 24px var(--primary-glow);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: 0.2s;
-}
-
-.play-main:active { transform: scale(0.95); }
-
-.fab {
-  pointer-events: auto;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: var(--surface);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--surface-border);
-  color: var(--text-main);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  transition: 0.2s;
-}
-.fab:active { transform: scale(0.95); }
-
-/* SETTINGS PANEL */
-.panel {
-  position: fixed;
-  bottom: -350px;
-  left: 0;
-  right: 0;
-  padding: 30px 24px 40px 24px;
-  background: var(--header-glass);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border-top: 1px solid var(--surface-border);
-  border-radius: 32px 32px 0 0;
-  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  z-index: 200;
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
-}
-
-.panel.show { bottom: 0; }
-
-.panel-header {
-  text-align: center;
+.card-title {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 10px;
-  color: var(--text-main);
-  position: relative;
+  margin: 0 0 4px 0;
 }
 
-.panel-header::after {
-  content: '';
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 5px;
-  background: var(--surface-border);
-  border-radius: 10px;
-}
-
-.setting-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.setting-group label {
-  font-size: 14px;
-  color: var(--text-muted);
-  font-family: 'Poppins', sans-serif;
-  display: flex;
-  justify-content: space-between;
-}
-
-/* CUSTOM SLIDERS */
-input[type=range] {
-  -webkit-appearance: none;
-  width: 100%;
-  background: transparent;
-}
-input[type=range]:focus { outline: none; }
-input[type=range]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 8px;
-  cursor: pointer;
-  background: var(--surface-border);
-  border-radius: 10px;
-}
-input[type=range]::-webkit-slider-thumb {
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-  background: var(--primary);
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -8px;
-  box-shadow: 0 2px 10px var(--primary-glow);
-  border: 2px solid white;
-}
-/* INSTALL POPUP STYLES */
-.install-popup {
-  position: fixed;
-  top: -100px; /* Hidden by default */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 400px;
-  background: var(--surface);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid var(--surface-border);
-  border-radius: 16px;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1000;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy slide in */
-}
-
-/* Class to trigger the popup sliding down */
-.install-popup.show {
-  top: calc(var(--headerH) + 16px);
-}
-
-.install-content {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.install-icon {
-  font-size: 24px;
-  background: rgba(255, 153, 51, 0.15);
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-}
-
-.install-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.install-title {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--text-main);
-}
-
-.install-desc {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.install-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.install-btn {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 30px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+.card-desc {
   font-size: 13px;
-  cursor: pointer;
-  box-shadow: 0 4px 15px var(--primary-glow);
+  color: var(--text-muted);
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
-.install-close {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 16px;
-  cursor: pointer;
-  padding: 4px;
+.card-arrow {
+  font-size: 20px;
+  color: var(--primary);
+  opacity: 0.7;
+  font-family: 'Poppins', sans-serif;
 }
 </style>
 </head>
 
 <body>
-<div id="installPopup" class="install-popup">
-  <div class="install-content">
-    <div class="install-icon">📲</div>
-    <div class="install-text">
-      <div class="install-title">Install App</div>
-      <div class="install-desc">Add to home screen for offline chanting</div>
-    </div>
-  </div>
-  <div class="install-actions">
-    <button id="installBtn" class="install-btn">Install</button>
-    <button id="closeInstallBtn" class="install-close">✕</button>
-  </div>
-</div>
+
 <div class="header">
-  <span style="margin-right: 8px;">🛕</span> શ્રી સર્વમંગલ નામાવલી
+  ૐ ભક્તિ સંગ્રહ
   <div class="theme-toggle" id="darkToggle">
     <span class="sun">☀</span>
     <span class="moon">🌙</span>
@@ -432,312 +214,71 @@ input[type=range]::-webkit-slider-thumb {
   </div>
 </div>
 
-<div class="main">
-  <div class="scroll-area" id="scrollArea">
-    <div class="mantra-list" id="list">
-      
-      <div class="spacer" id="topSpace"></div>
-      <div class="orb"></div>
+<div class="container">
+  <div class="greeting">જય સ્વામિનારાયણ</div>
+  <div class="subtitle">Select a path for your daily devotion</div>
 
-      <div class="mantra-card"><div class="index">૧</div><div>ૐ શ્રી સર્વમંગલાય નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૨</div><div>ૐ શ્રી સદ્રૂપાય નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૩</div><div>ૐ શ્રી સત્કૃતાય નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૪</div><div>ૐ શ્રી શાંતાય નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૫</div><div>ૐ શ્રી દિવ્યમંગલાય નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૬</div><div>ૐ શ્રી કરુણામયાય નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૭</div><div>ૐ શ્રી ભક્તવત્સલાય નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૮</div><div>ૐ શ્રી દયાળુદેવાય નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૯</div><div>ૐ શ્રી પરમાત્મને નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૧૦</div><div>ૐ શ્રી અનંતાય નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૧૧</div><div>ૐ શ્રી અવિનાશિને નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૧૨</div><div>ૐ શ્રી પરબ્રહ્મણે નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૧૩</div><div>ૐ શ્રી કરુણાસાગરાય નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૧૪</div><div>ૐ શ્રી દયામૂર્તયે નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૧૫</div><div>ૐ શ્રી પરમેશ્વરાય નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૧૬</div><div>ૐ શ્રી અનાદિદેવાય નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૧૭</div><div>ૐ શ્રી પરમાત્મને નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૧૮</div><div>ૐ શ્રી ભક્તપ્રિયાય નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૧૯</div><div>ૐ શ્રી કલ્યાણમૂર્તયે નમઃ</div></div>
-      <div class="mantra-card"><div class="index">૨૦</div><div>ૐ શ્રી શાશ્વતાય નમઃ</div></div>
+  <div class="card-grid">
+    
+    <a href="sarvamangal.html" class="menu-card">
+      <div class="card-icon">🛕</div>
+      <div class="card-content">
+        <h3 class="card-title">શ્રી સર્વમંગલ નામાવલી</h3>
+        <p class="card-desc">1000 Mantras • Auto-scroll</p>
+      </div>
+      <div class="card-arrow">➔</div>
+    </a>
 
-      <div class="spacer" id="bottomSpace"></div>
-    </div>
-  </div>
-</div>
+    <a href="#" class="menu-card coming-soon">
+      <div class="card-icon">📖</div>
+      <div class="card-content">
+        <h3 class="card-title">જનમંગલ નામાવલી</h3>
+        <p class="card-desc">Coming Soon</p>
+      </div>
+      <div class="card-arrow">🔒</div>
+    </a>
+    
+    <a href="#" class="menu-card coming-soon">
+      <div class="card-icon">📿</div>
+      <div class="card-content">
+        <h3 class="card-title">નિત્ય નિયમ</h3>
+        <p class="card-desc">Coming Soon</p>
+      </div>
+      <div class="card-arrow">🔒</div>
+    </a>
 
-<div class="controls-wrapper">
-  <div class="play-main" id="playBtn">
-    <span id="playIcon">▶</span> <span id="playText">Start</span>
-  </div>
-  <div class="fab" id="settingsBtn">⚙️</div>
-</div>
-
-<div class="panel" id="panel">
-  <div class="panel-header">Settings</div>
-  
-  <div class="setting-group">
-    <label><span>Font Size</span> <span id="fontVal">Medium</span></label>
-    <input type="range" id="fontSlider" min="14" max="36" value="24">
-  </div>
-  
-  <div class="setting-group">
-    <label><span>Flow Speed</span> <span id="speedVal">Normal</span></label>
-    <input type="range" id="speed" min="1" max="10" value="5">
   </div>
 </div>
 
 <script>
-const scrollArea = document.getElementById("scrollArea");
-const list = document.getElementById("list");
-const playBtn = document.getElementById("playBtn");
-const playIcon = document.getElementById("playIcon");
-const playText = document.getElementById("playText");
-const speed = document.getElementById("speed");
-const fontSlider = document.getElementById("fontSlider");
-const darkToggle = document.getElementById("darkToggle");
-const panel = document.getElementById("panel");
-const settingsBtn = document.getElementById("settingsBtn");
-const topSpace = document.getElementById("topSpace");
-const bottomSpace = document.getElementById("bottomSpace");
+  /* PWA Registration (Keep this to allow install from Home page too) */
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
+    });
+  }
 
-let offset = 0, playing = false, dragging = false, startY, startOffset;
-let animationFrameId;
-
-/* SPACERS */
-function setSpacers() {
-  const h = scrollArea.offsetHeight / 2;
-  topSpace.style.height = (h - 60) + "px"; // Offset slightly for aesthetics
-  bottomSpace.style.height = h + "px";
-}
-
-/* FOCUS MATH */
-/* FOCUS MATH */
-function updateFocus() {
-  const center = scrollArea.offsetHeight / 2;
+  /* Theme Sync Logic */
+  const darkToggle = document.getElementById("darkToggle");
   
-  list.querySelectorAll(".mantra-card").forEach(card => {
-    // Calculate position relative to the scroll container
-    const cardCenter = card.offsetTop + (card.offsetHeight / 2) - offset;
-    const dist = Math.abs(center - cardCenter);
-    
-    // Spread the falloff over a larger distance to make the slope gentler
-    const maxDist = scrollArea.offsetHeight; 
-    const ratio = Math.max(0, 1 - (dist / maxDist));
-    
-    // Smooth, subtle changes: 
-    // Opacity goes from 0.6 (very readable) to 1.0
-    // Scale goes from 0.96 (barely smaller) to 1.02
-    card.style.transform = `scale(${0.96 + (ratio * 0.06)})`;
-    card.style.opacity = 0.6 + (ratio * 0.4);
-    
-    // Apply the subtle primary color when it's near the center
-    if(dist < 70) {
-      card.classList.add("focused");
-    } else {
-      card.classList.remove("focused");
+  // Load saved theme on startup
+  window.onload = () => {
+    const savedTheme = localStorage.getItem("theme");
+    if(savedTheme === "light") {
+      document.body.classList.add("light");
+      darkToggle.classList.add("active");
     }
-  });
-}
-function apply() {
-  list.style.transform = `translateY(-${offset}px)`;
-  updateFocus();
-}
+  };
 
-/* AUTO ANIMATION */
-function animate() {
-  if(!playing || dragging) return;
-  
-  // Speed multiplier
-  offset += speed.value * 0.25; 
-  
-  const max = list.scrollHeight - scrollArea.offsetHeight;
-  if(offset >= max) {
-    offset = max;
-    playing = false;
-    playIcon.innerText = "↻";
-    playText.innerText = "Restart";
-    apply();
-    return;
-  }
-  
-  apply();
-  animationFrameId = requestAnimationFrame(animate);
-}
-
-playBtn.onclick = () => {
-  if(!playing && playText.innerText === "Restart") {
-    offset = 0;
-  }
-  
-  playing = !playing;
-  
-  if(playing) {
-    playIcon.innerText = "⏸";
-    playText.innerText = "Pause";
-    animate();
-  } else {
-    playIcon.innerText = "▶";
-    playText.innerText = "Resume";
-    cancelAnimationFrame(animationFrameId);
-  }
-};
-
-/* DRAG TO SCROLL */
-scrollArea.addEventListener('pointerdown', e => {
-  dragging = true;
-  startY = e.clientY;
-  startOffset = offset;
-  scrollArea.style.cursor = 'grabbing';
-});
-
-window.addEventListener('pointermove', e => {
-  if(!dragging) return;
-  
-  const deltaY = e.clientY - startY;
-  offset = startOffset - deltaY;
-  
-  // Clamp scrolling
-  const max = list.scrollHeight - scrollArea.offsetHeight;
-  if(offset < 0) offset = 0;
-  if(offset > max) offset = max;
-  
-  apply();
-});
-
-window.addEventListener('pointerup', () => {
-  if(dragging) {
-    dragging = false;
-    scrollArea.style.cursor = 'default';
-    if(playing) animate(); // Resume if it was playing
-  }
-});
-
-/* SETTINGS PANEL LOGIC */
-settingsBtn.onclick = e => {
-  e.stopPropagation();
-  panel.classList.toggle("show");
-};
-
-document.addEventListener("click", e => {
-  if(!panel.contains(e.target) && !settingsBtn.contains(e.target)){
-    panel.classList.remove("show");
-  }
-});
-
-/* UPDATE LABELS */
-function updateLabels() {
-  const fVal = fontSlider.value;
-  document.getElementById('fontVal').innerText = fVal < 18 ? 'Small' : fVal > 28 ? 'Large' : 'Medium';
-  
-  const sVal = speed.value;
-  document.getElementById('speedVal').innerText = sVal < 4 ? 'Slow' : sVal > 7 ? 'Fast' : 'Normal';
-}
-
-/* LOCAL STORAGE & INIT */
-window.onload = () => {
-  setSpacers();
-  
-  const savedFont = localStorage.getItem("fontSize") || 24;
-  const savedSpeed = localStorage.getItem("speed") || 5;
-  const savedTheme = localStorage.getItem("theme");
-  
-  fontSlider.value = savedFont;
-  speed.value = savedSpeed;
-  document.documentElement.style.setProperty("--fontScale", savedFont / 24);
-  
-  if(savedTheme === "light") {
-    document.body.classList.add("light");
-    darkToggle.classList.add("active");
-  }
-  
-  updateLabels();
-  apply(); // Initial render
-};
-
-/* HANDLE RESIZE */
-window.onresize = () => {
-  setSpacers();
-  apply();
-};
-
-/* EVENT LISTENERS FOR SLIDERS */
-fontSlider.oninput = e => {
-  const v = e.target.value;
-  document.documentElement.style.setProperty("--fontScale", v / 24);
-  localStorage.setItem("fontSize", v);
-  updateLabels();
-  setTimeout(apply, 50); // Small delay to let DOM update heights
-};
-
-speed.oninput = e => {
-  localStorage.setItem("speed", e.target.value);
-  updateLabels();
-};
-
-/* THEME TOGGLE */
-darkToggle.onclick = () => {
-  darkToggle.classList.toggle("active");
-  document.body.classList.toggle("light");
-  localStorage.setItem(
-    "theme",
-    document.body.classList.contains("light") ? "light" : "dark"
-  );
-};
-/* REGISTER PWA SERVICE WORKER */
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then(reg => console.log('Service Worker registered successfully.'))
-      .catch(err => console.log('Service Worker registration failed:', err));
-  });
-}
-/* INSTALL PWA LOGIC */
-let deferredPrompt;
-const installPopup = document.getElementById('installPopup');
-const installBtn = document.getElementById('installBtn');
-const closeInstallBtn = document.getElementById('closeInstallBtn');
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  // Prevent the default mini-infobar from appearing on mobile
-  e.preventDefault();
-  
-  // Stash the event so it can be triggered later.
-  deferredPrompt = e;
-  
-  // Show our custom premium UI popup after a short delay
-  setTimeout(() => {
-    installPopup.classList.add('show');
-  }, 1500); 
-});
-
-installBtn.addEventListener('click', async () => {
-  // Hide the custom popup
-  installPopup.classList.remove('show');
-  
-  if (deferredPrompt) {
-    // Show the native browser install prompt
-    deferredPrompt.prompt();
-    
-    // Wait for the user to respond to the prompt
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`User response to the install prompt: ${outcome}`);
-    
-    // We've used the prompt, and can't use it again, discard it
-    deferredPrompt = null;
-  }
-});
-
-// Close button logic
-closeInstallBtn.addEventListener('click', () => {
-  installPopup.classList.remove('show');
-});
-
-// If the app successfully installs, hide the popup completely
-window.addEventListener('appinstalled', () => {
-  installPopup.classList.remove('show');
-  deferredPrompt = null;
-  console.log('PWA was successfully installed');
-});
+  // Toggle and save theme
+  darkToggle.onclick = () => {
+    darkToggle.classList.toggle("active");
+    document.body.classList.toggle("light");
+    localStorage.setItem(
+      "theme",
+      document.body.classList.contains("light") ? "light" : "dark"
+    );
+  };
 </script>
 
 </body>

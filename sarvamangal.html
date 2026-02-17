@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#FF9933">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>શ્રી સર્વમંગલ નામાવલી</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #FF9933; /* Saffron */
+  --primary-dark: #E67A00;
+  --primary-glow: rgba(255, 153, 51, 0.4);
+  
+  /* Dark Theme Colors */
+  --bg1: #1a0b2e;
+  --bg2: #0d0514;
+  --bg3: #000000;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-border: rgba(255, 255, 255, 0.1);
+  --text-main: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --header-glass: rgba(26, 11, 46, 0.75);
+  
+  --headerH: 70px;
+  --fontScale: 1;
+}
+
+/* Light Theme Colors */
+body.light {
+  --bg1: #fffcf9;
+  --bg2: #ffeede;
+  --bg3: #ffdcb8;
+  --surface: rgba(255, 255, 255, 0.7);
+  --surface-border: rgba(255, 153, 51, 0.2);
+  --text-main: #3a1c0d;
+  --text-muted: rgba(58, 28, 13, 0.5);
+  --header-glass: rgba(255, 252, 249, 0.75);
+}
+
+body {
+  margin: 0;
+  font-family: 'Hind Vadodara', 'Poppins', sans-serif;
+  color: var(--text-main);
+  background: linear-gradient(160deg, var(--bg1), var(--bg2), var(--bg3));
+  overflow: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* HEADER */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--headerH);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--header-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--surface-border);
+  z-index: 100;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* PREMIUM THEME TOGGLE */
+.theme-toggle {
+  position: absolute;
+  right: 20px;
+  width: 60px;
+  height: 30px;
+  border-radius: 40px;
+  cursor: pointer;
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  box-sizing: border-box;
+  transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle .sun { color: #ffb300; font-size: 14px; z-index: 2; }
+.theme-toggle .moon { color: #9fa8ff; font-size: 13px; z-index: 2; }
+
+.toggle-knob {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: white;
+  left: 2px;
+  top: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.theme-toggle.active { background: rgba(255, 153, 51, 0.2); border-color: var(--primary); }
+.theme-toggle.active .toggle-knob { left: 32px; box-shadow: 0 2px 8px rgba(255,153,51,0.4); }
+
+/* MAIN CONTENT */
+.main { padding-top: var(--headerH); }
+
+.scroll-area {
+  height: calc(100vh - var(--headerH));
+  overflow: hidden;
+  position: relative;
+  touch-action: none;
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 80%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 80%, transparent);
+}
+
+.mantra-list { position: absolute; width: 100%; }
+.spacer { height: 0; }
+
+/* ORB ANIMATION */
+@keyframes pulse {
+  0% { box-shadow: 0 0 20px var(--primary-glow), 0 0 0 0 rgba(255, 153, 51, 0.2); transform: scale(1); }
+  50% { box-shadow: 0 0 40px var(--primary-glow), 0 0 0 20px rgba(255, 153, 51, 0); transform: scale(1.05); }
+  100% { box-shadow: 0 0 20px var(--primary-glow), 0 0 0 0 rgba(255, 153, 51, 0); transform: scale(1); }
+}
+
+.orb {
+  width: 80px;
+  height: 80px;
+  margin: 20px auto 40px auto;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffd480, var(--primary));
+  box-shadow: 0 0 20px var(--primary-glow);
+  animation: pulse 3s infinite ease-in-out;
+}
+
+/* MANTRA CARDS */
+/* MANTRA CARDS */
+.mantra-card {
+  margin: 10px 20px;
+  padding: 14px 20px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid transparent;
+  font-size: calc(clamp(20px, 4.5vw, 28px) * var(--fontScale));
+  font-weight: 500;
+  will-change: transform, opacity, color, background;
+  /* Removed CSS transition to stop jittering during smooth scroll */
+}
+
+.mantra-card.focused {
+  color: var(--primary);
+  font-weight: 600;
+  background: rgba(255, 153, 51, 0.05); /* Very subtle soft background */
+  /* Removed the harsh border and heavy drop-shadows */
+}
+.index {
+  min-width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 16px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  box-shadow: 0 4px 10px var(--primary-glow);
+}
+
+/* BOTTOM CONTROLS */
+.controls-wrapper {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  gap: 20px;
+  pointer-events: none; /* Let clicks pass through empty space */
+}
+
+.play-main {
+  pointer-events: auto;
+  padding: 16px 36px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px var(--primary-glow);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.2s;
+}
+
+.play-main:active { transform: scale(0.95); }
+
+.fab {
+  pointer-events: auto;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--surface);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--surface-border);
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  transition: 0.2s;
+}
+.fab:active { transform: scale(0.95); }
+
+/* SETTINGS PANEL */
+.panel {
+  position: fixed;
+  bottom: -350px;
+  left: 0;
+  right: 0;
+  padding: 30px 24px 40px 24px;
+  background: var(--header-glass);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-top: 1px solid var(--surface-border);
+  border-radius: 32px 32px 0 0;
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 200;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
+}
+
+.panel.show { bottom: 0; }
+
+.panel-header {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text-main);
+  position: relative;
+}
+
+.panel-header::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 5px;
+  background: var(--surface-border);
+  border-radius: 10px;
+}
+
+.setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.setting-group label {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* CUSTOM SLIDERS */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+}
+input[type=range]:focus { outline: none; }
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  cursor: pointer;
+  background: var(--surface-border);
+  border-radius: 10px;
+}
+input[type=range]::-webkit-slider-thumb {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -8px;
+  box-shadow: 0 2px 10px var(--primary-glow);
+  border: 2px solid white;
+}
+/* INSTALL POPUP STYLES */
+.install-popup {
+  position: fixed;
+  top: -100px; /* Hidden by default */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 400px;
+  background: var(--surface);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy slide in */
+}
+
+/* Class to trigger the popup sliding down */
+.install-popup.show {
+  top: calc(var(--headerH) + 16px);
+}
+
+.install-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.install-icon {
+  font-size: 24px;
+  background: rgba(255, 153, 51, 0.15);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.install-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.install-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-main);
+}
+
+.install-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.install-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.install-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.install-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+}
+/* BACK BUTTON */
+.back-btn {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--text-main);
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  transition: 0.2s;
+}
+
+.back-btn:active {
+  background: rgba(255, 153, 51, 0.2);
+  transform: translateY(-50%) scale(0.9);
+}
+</style>
+</head>
+
+<body>
+<div id="installPopup" class="install-popup">
+  <div class="install-content">
+    <div class="install-icon">📲</div>
+    <div class="install-text">
+      <div class="install-title">Install App</div>
+      <div class="install-desc">Add to home screen for offline chanting</div>
+    </div>
+  </div>
+  <div class="install-actions">
+    <button id="installBtn" class="install-btn">Install</button>
+    <button id="closeInstallBtn" class="install-close">✕</button>
+  </div>
+</div>
+<div class="header">
+  <a href="index.html" class="back-btn">❮</a>
+  
+  <span><span style="margin-right: 8px;">🛕</span> શ્રી સર્વમંગલ નામાવલી</span>
+  
+  <div class="theme-toggle" id="darkToggle">
+    <span class="sun">☀</span>
+    <span class="moon">🌙</span>
+    <div class="toggle-knob"></div>
+  </div>
+</div>
+<div class="main">
+  <div class="scroll-area" id="scrollArea">
+    <div class="mantra-list" id="list">
+      
+      <div class="spacer" id="topSpace"></div>
+      <div class="orb"></div>
+
+  <div class="mantra-card"><div class="index">૧. </div><div>ૐ શ્રી સ્વામિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨. </div><div>ૐ શ્રી બ્રહ્મણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩. </div><div>ૐ શ્રી પરબ્રહ્મણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪. </div><div>ૐ શ્રી કૃષ્ણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫. </div><div>ૐ શ્રી પુરષોત્તમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬. </div><div>ૐ શ્રી બ્રહ્મધામ્ને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭. </div><div>ૐ શ્રી વાસુદેવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮. </div><div>ૐ શ્રી ઇશેશાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯. </div><div>ૐ શ્રી દિવ્યવિગ્રહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૦.</div><div>ૐ શ્રી સુવ્રતાત્મને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૧.</div><div>ૐ શ્રી જગન્નાથાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૨.</div><div>ૐ શ્રી ઇષ્ટદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૩.</div><div>ૐ શ્રી કરુણાનિધયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૪.</div><div>ૐ શ્રી પ્રતાપસિંહશરણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૫.</div><div>ૐ શ્રી શતાનંદવરપ્રદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૬.</div><div>ૐ શ્રી નારાયણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૭.</div><div>ૐ શ્રી નરસખાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૮.</div><div>ૐ શ્રી બદરીશાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૯.</div><div>ૐ શ્રી તપઃપ્રીયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૦.</div><div>ૐ શ્રી સ્વધર્મસ્થાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૧.</div><div>ૐ શ્રી મુનિધ્યેયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૨.</div><div>ૐ શ્રી મહર્ષિગણપૂજિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૩.</div><div>ૐ શ્રી અધર્મવૈરિણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૪.</div><div>ૐ શ્રી દુર્વાસઃશપ્તધર્માદ્યનુગ્રહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૫.</div><div>ૐ શ્રી ધર્માવતારાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૬.</div><div>ૐ શ્રી ધર્માત્મને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૭.</div><div>ૐ શ્રી ભક્તિધર્માનુશાસનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૮.</div><div>ૐ શ્રી રામાનંદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૯.</div><div>ૐ શ્રી જનાનન્દાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૦.</div><div>ૐ શ્રી ઔદ્ધવાધ્વપ્રવર્તકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૧.</div><div>ૐ શ્રી વિષ્ણુયાગપ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૨.</div><div>ૐ શ્રી ભક્તિધર્મારાધિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૩.</div><div>ૐ શ્રી ઈશ્વરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૪.</div><div>ૐ શ્રી વૃંદાવનદવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૫.</div><div>ૐ શ્રી વરદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૬.</div><div>ૐ શ્રી મુનિસંઘહિતાવહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૭.</div><div>ૐ શ્રી દ્રૌણ્યર્તિહર્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૮.</div><div>ૐ શ્રી વિઘ્નેશાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૯.</div><div>ૐ શ્રી ધર્મસંકષ્ટનાશનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૦.</div><div>ૐ શ્રી ભક્તિધર્માત્મજાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૧.</div><div>ૐ શ્રી ભૂમ્ને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૨.</div><div>ૐ શ્રી ભક્તિધર્મતપઃફલાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૩.</div><div>ૐ શ્રી સાવર્ણિગોત્રતિલકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૪.</div><div>ૐ શ્રી મધ્વાદ્યનવમીજનુષે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૫.</div><div>ૐ શ્રી જનમંગલદિવ્યાંગાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૬.</div><div>ૐ શ્રી નરાકૃતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૭.</div><div>ૐ શ્રી અલૌકિકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૮.</div><div>ૐ શ્રી ભૂતલાનન્દજનકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૯.</div><div>ૐ શ્રી દ્વિજેન્દ્રકુલભૂષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૦.</div><div>ૐ શ્રી રામપ્રતાપાવરજાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૧.</div><div>ૐ શ્રી હનૂમદભિરક્ષિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૨.</div><div>ૐ શ્રી હરિકૃષ્ણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૩.</div><div>ૐ શ્રી હરયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૪.</div><div>ૐ શ્રી કૃષ્ણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૫.</div><div>ૐ શ્રી નીલકંઠાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૬.</div><div>ૐ શ્રી વૃષાત્મજાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૭.</div><div>ૐ શ્રી સ્ત્રીવૃંદલાલિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૮.</div><div>ૐ શ્રી ભક્તિનંદનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૯.</div><div>ૐ શ્રી પ્રિયઢ્ઢર્શનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૦.</div><div>ૐ શ્રી હરિપ્રસાદહર્ષાબ્ધે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૧.</div><div>ૐ શ્રી ધર્મપત્નીસ્તનંધયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૨.</div><div>ૐ શ્રી ક્રીડદ્‌બાલવ્રજાનંદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૩.</div><div>ૐ શ્રી કાલીદત્તમદાનુપદે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૪.</div><div>ૐ શ્રી ઇચ્છારામાગ્રજાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૫.</div><div>ૐ શ્રી યોધ્યાવાસાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૬.</div><div>ૐ શ્રી બાલ્યમનોહરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૭.</div><div>ૐ શ્રી સરયૂનિયતસ્નાનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૮.</div><div>ૐ શ્રી સીતારામેક્ષણોત્સુકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૯.</div><div>ૐ શ્રી પ્રદક્ષિણીકૃતાયોધ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૦.</div><div>ૐ શ્રી કરાત્તજપમાલિકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૧.</div><div>ૐ શ્રી દર્શનીયોર્ધ્વતિલકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૨.</div><div>ૐ શ્રી પુરાણશ્રવણાવરદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૩.</div><div>ૐ શ્રી વર્ણિવ્રતધરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૪.</div><div>ૐ શ્રી દાંતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૫.</div><div>ૐ શ્રી ગુરુભક્તાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૬.</div><div>ૐ શ્રી ઉદારધિયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૭.</div><div>ૐ શ્રી અધીતાખિલસચ્છાસ્ત્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૮.</div><div>ૐ શ્રી સામગાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૯.</div><div>ૐ શ્રી નિરહંકૃતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૦.</div><div>ૐ શ્રી પ્રસૂપદિષ્ટસાગાત્મભક્તાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૧.</div><div>ૐ શ્રી અજ્ઞાનહારકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૨.</div><div>ૐ શ્રી પિતૃપ્રત્તાત્મવિજ્ઞાનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૩.</div><div>ૐ શ્રી પિતૃદિવ્યગતિપ્રદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૪.</div><div>ૐ શ્રી નિરાશાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૫.</div><div>ૐ શ્રી તીવ્રવૈરાગ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૬.</div><div>ૐ શ્રી નસંત્યક્તગૃહબાંધવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૭.</div><div>ૐ શ્રી વર્ણિવેષાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૮.</div><div>ૐ શ્રી મહાસત્ત્વાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૯.</div><div>ૐ શ્રી સ્વજનજ્ઞાતનિર્ગમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૦.</div><div>ૐ શ્રી અંસલંબિતસચ્છાસ્ત્રસારોદ્ધારાલ્પપુસ્તકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૧.</div><div>ૐ શ્રી ગણેશસ્મરણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૨.</div><div>ૐ શ્રી તીર્ણસરય્વે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૩.</div><div>ૐ શ્રી દૈત્યમોહનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૪.</div><div>ૐ શ્રી વનવાસરુચે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૫.</div><div>ૐ શ્રી શ્રાદ્ધાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૬.</div><div>ૐ શ્રી વિપ્રેન્દ્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૭.</div><div>ૐ શ્રી નૈષ્ઠિકાગ્રણ્યે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૮.</div><div>ૐ શ્રી હિમાદ્રિસાનુચરણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૯.</div><div>ૐ શ્રી નિર્ભયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૦૦</div><div> ૐ શ્રી ભીતભૈરવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૦૧</div><div> ૐ શ્રી નિઃશંકસંસ્થાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૦૨</div><div> ૐ શ્રી હનુમદ્દત્તસ્વાદુફલાસયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૦૩</div><div> ૐ શ્રી પુલહાશ્રમવાસાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૦૪</div><div> ૐ શ્રી અર્કપ્રીણનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૦૫</div><div> ૐ શ્રી અર્કસમીક્ષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૦૬</div><div> ૐ શ્રી ઊર્ધ્વદોષણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૦૭</div><div> ૐ શ્રી એકપાદસ્થાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૦૮</div><div> ૐ શ્રી વિસ્માપિતતપોધનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૦૯</div><div> ૐ શ્રી કૃશાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૧૦</div><div> ૐ શ્રી મહાતપસે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૧૧</div><div> ૐ શ્રી શુદ્ધાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૧૨</div><div> ૐ શ્રી ભક્તિધર્મનિસેવિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૧૩</div><div> ૐ શ્રી ગોપાલયોગિસંપ્રાપ્તસાંગયોગાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૧૪</div><div> ૐ શ્રી અતિધૈર્યવતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૧૫</div><div> ૐ શ્રી યોગક્રિયાપટવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૧૬</div><div> ૐ શ્રી કર્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૧૭</div><div> ૐ શ્રી કૃતજ્ઞાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૧૮</div><div> ૐ શ્રી ભૂરિતીર્થકૃતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૧૯</div><div> ૐ શ્રી ભ્રહ્માત્મસંસ્થિતાયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૨૦</div><div> ૐ શ્રી શાંતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૨૧</div><div> ૐ શ્રી સિદ્ધવલ્લભપૂજિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૨૨</div><div> ૐ શ્રી ગોપાલરક્ષકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૨૩</div><div> ૐ શ્રી સિદ્ધદર્પઘ્ને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૨૪</div><div> ૐ શ્રી માંંત્રિકાર્ચિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૨૫</div><div> ૐ શ્રી તૈલંગવિપ્રદોષઘ્નાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૨૬</div><div> ૐ શ્રી કૃત્યાભીષણદર્શનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૨૭</div><div> ૐ શ્રી પિબૈકમાનઘ્ને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૨૮</div><div> ૐ શ્રી કાલભૈરવત્રાસદેક્ષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૨૯</div><div> ૐ શ્રી જગન્નાથપુરાવાસાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૩૦</div><div> ૐ શ્રી આસુરાવેશહૃદે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૩૧</div><div> ૐ શ્રી વિભવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૩૨</div><div> ૐ શ્રી ધાર્મિકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૩૩</div><div> ૐ શ્રી અસુરગુર્વોઘોચ્છેદહેતવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૩૪</div><div> ૐ શ્રી અવિક્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૩૫</div><div> ૐ શ્રી સત્રધર્માર્ચિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૩૬</div><div> ૐ શ્રી કાંતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૩૭</div><div> ૐ શ્રી સ્વપ્રતાપક્ષિતાસુરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૩૮</div><div> ૐ શ્રી નાનાતીર્થકૃતાવાસાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૩૯</div><div> ૐ શ્રી પ્રાવૃડ્‌ભ્રાવકાશકૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૪૦</div><div> ૐ શ્રી ગ્રીષ્મસાધિતપંચાગ્ને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૪૧</div><div> ૐ શ્રી શિશિરાંબુસ્થિતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૪૨</div><div> ૐ શ્રી શુચયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૪૩</div><div> ૐ શ્રી નિર્માનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૪૪</div><div> ૐ શ્રી નિર્મયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૪૫</div><div> ૐ શ્રી અસ્નેહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૪૬</div><div> ૐ શ્રી નિષ્કામાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૪૭</div><div> ૐ શ્રી નિર્જિતેન્દ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૪૮</div><div> ૐ શ્રી જિતનિદ્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૪૯</div><div> ૐ શ્રી જિતક્રોધાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૫૦</div><div> ૐ શ્રી નિર્મદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૫૧</div><div> ૐ શ્રી નિઃસ્પૃહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૫૨</div><div> ૐ શ્રી અચલાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૫૩</div><div> ૐ શ્રી કૃચ્છવ્રતિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૫૪</div><div> ૐ શ્રી સત્યવાદિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૫૫</div><div> ૐ શ્રી ક્ષમિણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૫૬</div><div> ૐ શ્રી ધર્મનિસંતાનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૫૭</div><div> ૐ શ્રી જિતત્ર્યવસ્થાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૫૮</div><div> ૐ શ્રી મેધાવિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૫૯</div><div> ૐ શ્રી દંભહીનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૬૦</div><div> ૐ શ્રી તપોધનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૬૧</div><div> ૐ શ્રી ઉપવીતિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૬૨</div><div> ૐ શ્રી વલ્કવાસસે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૬૩</div><div> ૐ શ્રી તરુમૂલનિકેતનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૬૪</div><div> ૐ શ્રી અહિંસવૃત્તયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૬૫</div><div> ૐ શ્રી તેજસ્વિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૬૬</div><div> ૐ શ્રી નિર્નિમેષવિલોચનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૬૭</div><div> ૐ શ્રી ધનુર્મુક્તેષુગમનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૬૮</div><div> ૐ શ્રી બ્રહ્મદર્શિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૬૯</div><div> ૐ શ્રી મહામતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૭૦</div><div> ૐ શ્રી અયાચિતાહૃતાહારાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૭૧</div><div> ૐ શ્રી નિદ્‌ર્વન્દ્વાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૭૨</div><div> ૐ શ્રી નિષ્પરિગ્રહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૭૩</div><div> ૐ શ્રી વાય્વાહારાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૭૪</div><div> ૐ શ્રી જલાહારાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૭૫</div><div> ૐ શ્રી મિતાહારાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૭૬</div><div> ૐ શ્રી અક્ષતાંગકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૭૭</div><div> ૐ શ્રીજ્ઞાનિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૭૮</div><div> ૐ શ્રી ધ્યાનિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૭૯</div><div> ૐ શ્રી જિતસ્વાદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૮૦</div><div> ૐ શ્રી પ્રત્યાહારહઠાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૮૧</div><div> ૐ શ્રી અસ્મયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૮૨</div><div> ૐ શ્રી પાવનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૮૩</div><div> ૐ શ્રી તૈર્થિકગુરવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૮૪</div><div> ૐ શ્રી વર્ણિરાજાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૮૫</div><div> ૐ શ્રી દયાકરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૮૬</div><div> ૐ શ્રી જટિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૮૭</div><div> ૐ શ્રી કૌપીનવસનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૮૮</div><div> ૐ શ્રી શાલગ્રામતૃષાહરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૮૯</div><div> ૐ શ્રી શિવાપ્તસક્તવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૯૦</div><div> ૐ શ્રી અક્ષોભ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૯૧</div><div> ૐ શ્રી નિઃસંગાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૯૨</div><div> ૐ શ્રી અધ્યાત્મવિત્તમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૯૩</div><div> ૐ શ્રી સદાસમાધયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૯૪</div><div> ૐ શ્રી આનંદિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૯૫</div><div> ૐ શ્રી નિર્દોષાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૯૬</div><div> ૐ શ્રી દોષનાશનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૯૭</div><div> ૐ શ્રી કાંતારગતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૯૮</div><div> ૐ શ્રી એકાકિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૯૯</div><div> ૐ શ્રી સર્વાસાધુગુણાલયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૦૦</div><div> ૐ શ્રી તૈર્થિકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૦૧</div><div> ૐ શ્રી તીર્થધર્મજ્ઞાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૦૨</div><div> ૐ શ્રી તીર્થસ્થાધર્મનાશનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૦૩</div><div> ૐ શ્રી અનાદૃવપઃસૌખ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૦૪</div><div> ૐ શ્રી પ્રાણાયામપરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૦૫</div><div> ૐ શ્રી વ્રતિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૦૬</div><div> ૐ શ્રી ઋષિવૃત્તયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૦૭</div><div> ૐ શ્રી મુનયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૦૮</div><div> ૐ શ્રી મૌનિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૦૯</div><div> ૐ શ્રી નિર્વિકલ્પાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૧૦</div><div> ૐ શ્રી અલ્પભાષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૧૧</div><div> ૐ શ્રી વસ્ત્રપૂતોદપિબાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૧૨</div><div> ૐ શ્રી યાવદર્થાંગચેષ્ટિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૧૩</div><div> ૐ શ્રી ભ્રહ્મજ્ઞસ્વૈરવર્તિત્વબોધિગ્રંથવિવર્જનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૧૪</div><div> ૐ શ્રી નિરુપાનહે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૧૫</div><div> ૐ શ્રી અપૃષ્ટાધ્વને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૧૬</div><div> ૐ શ્રી ઘોરારણ્યચરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૧૭</div><div> ૐ શ્રી અભ્રમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૧૮</div><div> ૐ શ્રી સ્રયંગગંધાસહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૧૯</div><div> ૐ શ્રી અસક્તાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૨૦</div><div> ૐ શ્રી જડાંગિરસવર્તનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૨૧</div><div> ૐ શ્રી ઊર્ધ્વરેતસે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૨૨</div><div> ૐ શ્રી બ્રહ્મચારિણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૨૩</div><div> ૐ શ્રી યોગિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૨૪</div><div> ૐ શ્રી યોગજ્ઞસન્નતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૨૫</div><div> ૐ શ્રી યોગીન્દ્રદુશ્ચરાચરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૨૬</div><div> ૐ શ્રી સૌરાષ્ટ્‌જનપાવનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૨૭</div><div> ૐ શ્રી લોજલોકમહાનંદનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૨૮</div><div> ૐ શ્રી સાધવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૨૯</div><div> ૐ શ્રી સાધુપ્રપૂજિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૩૦</div><div> ૐ શ્રી અનુચ્ચારિતદુર્વાક્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૩૧</div><div> ૐ શ્રી મધુરાક્ષરભાષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૩૨</div><div> ૐ શ્રી ત્યાગિમાન્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૩૩</div><div> ૐ શ્રી મહાયોગિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૩૪</div><div> ૐ શ્રી સદાશ્ચર્યક્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૩૫</div><div> ૐ શ્રી સ્થિરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૩૬</div><div> ૐ શ્રી ધ્યાત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૩૭</div><div> ૐ શ્રી ધ્યાતૃમનોદર્શિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૩૮</div><div> ૐ શ્રી મનસ્વિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૩૯</div><div> ૐ શ્રી માનદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૪૦</div><div> ૐ શ્રી મૃદવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૪૧</div><div> ૐ શ્રી પ્રશ્નોત્તરપટવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૪૨</div><div> ૐ શ્રી વેદતત્ત્વજ્ઞાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૪૩</div><div> ૐ શ્રી બુદ્ધિમતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૪૪</div><div> ૐ શ્રી બુધાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૪૫</div><div> ૐ શ્રી ઉદ્ધવેક્ષોત્સુકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૪૬</div><div> ૐ શ્રી અનંતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૪૭</div><div> ૐ શ્રી પત્રીલેખપટવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૪૮</div><div> ૐ શ્રી પ્રભવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૪૯</div><div> ૐ શ્રી પત્ર્યુત્તરજ્ઞાતનિજૈશ્ચર્યસાધ્વતિમાનિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૫૦</div><div> ૐ શ્રી રામાનંદસ્વામિવીક્ષાનન્દાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૫૧</div><div> ૐ શ્રી સાધુપ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૫૨</div><div> ૐ શ્રી પ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૫૩</div><div> ૐ શ્રી બોધન્યાપ્તમહાદીક્ષાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૫૪</div><div> ૐ શ્રી ગુરુસેવાપરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૫૫</div><div> ૐ શ્રી યમિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૫૬</div><div> ૐ શ્રી ભક્તાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૫૭</div><div> ૐ શ્રી નારાયણમુનયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૫૮</div><div> ૐ શ્રી સહજાનંદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૫૯</div><div> ૐ શ્રી આત્મદૃશે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૬૦</div><div> ૐ શ્રી ગુરુમાન્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૬૧</div><div> ૐ શ્રી ગુરુપ્રેષ્ઠાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૬૨</div><div> ૐ શ્રી ગુર્વંતિકકૃતાંજલયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૬૩</div><div> ૐ શ્રી ગુર્વાજ્ઞાકૃતત્પાશ્ચોપવેશગમનક્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૬૪</div><div> ૐ શ્રી નારાયણાનન્યતમયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૬૫</div><div> ૐ શ્રી એકાંતિકમુનિપ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૬૬</div><div> ૐ શ્રી વર્ણીન્દ્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૬૭</div><div> ૐ શ્રી નૈષ્ઠિકપ્રેષ્ઠાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૬૮</div><div> ૐ શ્રી એકાંતિકસદર્ચકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૬૯</div><div> ૐ શ્રી યશસ્વિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૭૦</div><div> ૐ શ્રી ભૂરિતેજસ્વિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૭૧</div><div> ૐ શ્રી વૈદિકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૭૨</div><div> ૐ શ્રી બ્રહ્મવર્ચસિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૭૩</div><div> ૐ શ્રી સન્નાયવર્તિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૭૪</div><div> ૐ શ્રી નિર્દ્વેષાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૭૫</div><div> ૐ શ્રી ભક્તિહર્ષવિવર્ધનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૭૬</div><div> ૐ શ્રી ગૃહીતહિતવાચે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૭૭</div><div> ૐ શ્રી સર્વભૂતત્ત્વવિદે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૭૮</div><div> ૐ શ્રી ઊહવતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૭૯</div><div> ૐ શ્રી સત્યપ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૮૦</div><div> ૐ શ્રી સત્યપરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૮૧</div><div> ૐ શ્રી નિષ્કામનરવલ્લભાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૮૨</div><div> ૐ શ્રી અદ્રોકહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૮૩</div><div> ૐ શ્રી સદોદ્યોગિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૮૪</div><div> ૐ શ્રી ષડૃર્મિવિજયક્ષમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૮૫</div><div> ૐ શ્રી ધર્મકાર્યક્ષિપ્રકારિણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૮૬</div><div> ૐ શ્રી દીર્ધદર્શિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૮૭</div><div> ૐ શ્રી વિચારવતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૮૮</div><div> ૐ શ્રી દેશકાલાઘવિહતસ્વસ્વરુપાચલસ્થિતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૮૯</div><div> ૐ શ્રી સત્તમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૯૦</div><div> ૐ શ્રી દમઘૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૯૧</div><div> ૐ શ્રી દક્ષાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૯૨</div><div> ૐ શ્રી વિનીતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૯૩</div><div> ૐ શ્રી સ્મૃતિમતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૯૪</div><div> ૐ શ્રી ઋજવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૯૫</div><div> ૐ શ્રી સચ્છાસ્ત્રવ્યસનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૯૬</div><div> ૐ શ્રી અવ્યગ્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૯૭</div><div> ૐ શ્રી અભિમાનિપુરુષારુચયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૯૮</div><div> ૐ શ્રી અતિસર્વમતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૨૯૯</div><div> ૐ શ્રી વાગ્મિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૦૦</div><div> ૐ શ્રી સત્સંગિજનવલ્લભાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૦૧</div><div> ૐ શ્રી અપ્રમત્તાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૦૨</div><div> ૐ શ્રી અતિપ્રગલ્ભાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૦૩</div><div> ૐ શ્રી અનલસાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૦૪</div><div> ૐ શ્રી અન્યગુણગ્રહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૦૫</div><div> ૐ શ્રી સદાચારપ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૦૬</div><div> ૐ શ્રી શુષ્કજ્ઞાનિવાદતમોરવયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૦૭</div><div> ૐ શ્રી કૃષ્ણાર્પિતાન્નગંધાદિદેવતાપિતૃયાજકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૦૮</div><div> ૐ શ્રી સદ્યઃ પ્રશ્નસમાધાનવિસ્માપિતમભાજનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૦૯</div><div> ૐ શ્રી અજાતશત્રવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૧૦</div><div> ૐ શ્રી સમદૃશે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૧૧</div><div> ૐ શ્રી ધર્મનિષ્ઠમહાદરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૧૨</div><div> ૐ શ્રી અનસૂયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૧૩</div><div> ૐ શ્રી અચલપ્રતિજ્ઞાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૧૪</div><div> ૐ શ્રી કામશાસ્ત્રવિવર્જનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૧૫</div><div> ૐ શ્રી દીનાલ્પવિકલવત્વેક્ષાજાતતીવ્રવ્યથાકુલાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૧૬</div><div> ૐ શ્રી સ્વધર્માદિગુણોપેતહાર્યભક્તજનારુચયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૧૭</div><div> ૐ શ્રી સન્મંડલાવાસરુચયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૧૮</div><div> ૐ શ્રી સન્મંડલપરાયણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૧૯</div><div> ૐ શ્રી સચ્છાસ્ત્રનિંદિતત્યાગિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૨૦</div><div> ૐ શ્રી પ્રશસ્તાર્થનિષેવિકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૨૧</div><div> ૐ શ્રી સંપદાપત્સમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૨૨</div><div> ૐ શ્રી મોક્ષધિષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૨૩</div><div> ૐ શ્રી પ્રતિભાનતવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૨૪</div><div> ૐ શ્રી સુચિરશ્રુતસચ્છાસ્ત્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૨૫</div><div> ૐ શ્રી નાપમાનિસજ્જનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૨૬</div><div> ૐ શ્રી વાક્યાર્થક્ષિપ્રવિદે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૨૭</div><div> ૐ શ્રી શત્રુમિત્રદત્તસમોત્તરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૨૮</div><div> ૐ શ્રી અગ્રાહ્યવસ્ત્વનાકાંક્ષિણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૨૯</div><div> ૐ શ્રી નષ્ટવસ્તુશુચોજિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૩૦</div><div> ૐ શ્રી યથોેચિતસમારંભાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૩૧</div><div> ૐ શ્રી સફલારબ્ધસત્ક્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૩૨</div><div> ૐ શ્રી સચ્છાસ્ત્રનુગતપ્રજ્ઞાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૩૩</div><div> ૐ શ્રી દૈવપિત્ર્યસ્વકર્મકૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૩૪</div><div> ૐ શ્રી અપૈશુન્યકૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૩૫</div><div> ૐ શ્રી અદ્યુતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૩૬</div><div> ૐ શ્રી પાપિસંસર્ગ્યનાદરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૩૭</div><div> ૐ શ્રી બ્રહ્મનિંદાશ્રવઃખેદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૩૮</div><div> ૐ શ્રી સ્ત્રીપ્રસંગભૃશારુચયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૩૯</div><div> ૐ શ્રી અકાર્યાચરણહીતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૪૦</div><div> ૐ શ્રી સમયોચિતભાષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૪૧</div><div> ૐ શ્રી નિર્લજ્જાનતસદ્વિપ્રગુરુદેવપદામ્બુજાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૪૨</div><div> ૐ શ્રી મુક્તાનંદાનુગાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૪૩</div><div> ૐ શ્રી તુષ્ટાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૪૪</div><div> ૐ શ્રી ગુણાબ્ધયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૪૫</div><div> ૐ શ્રી સન્મનોહરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૪૬</div><div> ૐ શ્રી ગુરુદત્તજનસ્વામ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૪૭</div><div> ૐ શ્રી સુરમ્યવિષયારુચયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૪૮</div><div> ૐ શ્રી ગુરુયાચિતભક્તાન્તદુઃખસ્વપ્રાપ્તિસદ્વરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૪૯</div><div> ૐ શ્રી અતિમાનુષત્કર્મણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૫૦</div><div> ૐ શ્રી સુખસેવ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૫૧</div><div> ૐ શ્રી અખિલેષ્ટદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૫૨</div><div> ૐ શ્રી પ્રપન્નાભયદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૫૩</div><div> ૐ શ્રી શ્રીમતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૫૪</div><div> ૐ શ્રી ઉત્તમોત્તમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૫૫</div><div> ૐ શ્રી આત્મવતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૫૬</div><div> ૐ શ્રી તાપત્રિતયહૃદ્વાર્તાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૫૭</div><div> ૐ શ્રી સદ્‌સદ્‌વ્યક્તિવિત્તમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૫૮</div><div> ૐ શ્રી સત્પતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૫૯</div><div> ૐ શ્રી સર્વહિતકૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૬૦</div><div> ૐ શ્રીજ્ઞાનદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૬૧</div><div> ૐ શ્રી ભવમોચકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૬૨</div><div> ૐ શ્રી ભૂરિપ્રતાપાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૬૩</div><div> ૐ શ્રી નિર્મોહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૬૪</div><div> ૐ શ્રી મહારાજાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૬૫</div><div> ૐ શ્રી નૃપાર્ચિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૬૬</div><div> ૐ શ્રી અધૃષ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૬૭</div><div> ૐ શ્રી અવિકૃતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૬૮</div><div> ૐ શ્રી અજવ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૬૯</div><div> ૐ શ્રી શરણ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૭૦</div><div> ૐ શ્રી ભક્તવત્સલાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૭૧</div><div> ૐ શ્રી અતર્ક્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૭૨</div><div> ૐ શ્રી અનુપમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૭૩</div><div> ૐ શ્રી અપારાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૭૪</div><div> ૐ શ્રી અપ્રમાદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૭૫</div><div> ૐ શ્રી અવ્યયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૭૬</div><div> ૐ શ્રી ઉજ્જવલાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૭૭</div><div> ૐ શ્રી ધર્મશંસિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૭૮</div><div> ૐ શ્રી ધર્મહેતવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૭૯</div><div> ૐ શ્રી વેદગૂઢાર્થબોધકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૮૦</div><div> ૐ શ્રી કાલામાયાભયત્રાત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૮૧</div><div> ૐ શ્રી ભક્તવર્મણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૮૨</div><div> ૐ શ્રી સુમંગલાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૮૩</div><div> ૐ શ્રી ઉપાસનારીતિવક્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૮૪</div><div> ૐ શ્રી બ્રહ્મધામદર્શકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૮૫</div><div> ૐ શ્રી બ્રહ્મભૂતપરબ્રહ્મોપાસનાસ્થાપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૮૬</div><div> ૐ શ્રી અક્ષરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૮૭</div><div> ૐ શ્રી કંદર્પદર્પદલનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૮૮</div><div> ૐ શ્રી નૈષ્ઠિકવ્રતપોષકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૮૯</div><div> ૐ શ્રી અદીનદિવ્યચરિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૯૦</div><div> ૐ શ્રી મનોનિગ્રહયુક્તિદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૯૧</div><div> ૐ શ્રી વરણીયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૯૨</div><div> ૐ શ્રી અન્યદુઃખજ્ઞાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૯૩</div><div> ૐ શ્રી સંસારાર્ણવનાવિકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૯૪</div><div> ૐ શ્રી સ્વામિનારાયણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૯૫</div><div> ૐ શ્રી વાક્યસુધાતર્પિતસત્સભાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૯૬</div><div> ૐ શ્રી વિધવાસ્પર્શદોષાતિપ્રખ્યાત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૯૭</div><div> ૐ શ્રી ઉપશમસ્થિતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૯૮</div><div> ૐ શ્રી પ્રતિબિમ્બાંશવાદાદિમતતૂલદવાનલાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૩૯૯</div><div> ૐ શ્રી સભક્તિધર્મધર્માઢ્યભક્તિયોગપ્રવર્તકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૦૦</div><div> ૐ શ્રી પ્રોક્તાસદ્દશકાલાદિદોષાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૦૧</div><div> ૐ શ્રી નિષ્કપટાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૦૨</div><div> ૐ શ્રી સદ્દેશકાલાદિગુણજ્ઞાપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૦૩</div><div> ૐ શ્રી સત્પ્રંશસકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૦૪</div><div> ૐ શ્રી સ્વધર્મશિથિલાપ્રીતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૦૫</div><div> ૐ શ્રી ભક્તક્લ્પમહીરુહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૦૬</div><div> ૐ શ્રી ધર્મહીનજ્ઞાનભક્તિદોષભૂયસ્ત્વબોધકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૦૭</div><div> ૐ શ્રી સ્વધર્મહીનપુરુષત્યાગિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૦૮</div><div> ૐ શ્રી સત્યપ્રતિશ્રુતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૦૯</div><div> ૐ શ્રી બહ્વન્નસત્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૧૦</div><div> ૐ શ્રી વિષ્ણવાદિપંચાયતમાનનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૧૧</div><div> ૐ શ્રી વિપ્રાપરાધસહનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૧૨</div><div> ૐ શ્રી સત્યસંકલ્પાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૧૩</div><div> ૐ શ્રી આશુદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૧૪</div><div> ૐ શ્રી સાન્વયાધર્મમૂલઘ્નાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૧૫</div><div> ૐ શ્રી યજ્ઞકૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૧૬</div><div> ૐ શ્રી ભ્રાહ્મણપ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૧૭</div><div> ૐ શ્રી વિષ્ણુસ્વરુપાવિષ્કારાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૧૮</div><div> ૐ શ્રી નિર્માયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૧૯</div><div> ૐ શ્રી સર્વદર્શનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૨૦</div><div> ૐ શ્રી જનસાહસ્રયુગપત્સમાધિસ્થિતિકારકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૨૧</div><div> ૐ શ્રી સ્વેક્ષાયાતનરસ્રયોઘાન્યોન્યાસંમર્દસદ્યશસે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૨૨</div><div> ૐ શ્રી વિપ્રભોજનસંહૃષ્ટાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૨૩</div><div> ૐ શ્રી વિપ્રાત્પમને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૨૪</div><div> ૐ શ્રી વિપ્રપૂજિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૨૫</div><div> ૐ શ્રી વેદૈકવૈદ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૨૬</div><div> ૐ શ્રી દિવ્યાંગાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૨૭</div><div> ૐ શ્રી મેઘજિદ્દર્પભંજનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૨૮</div><div> ૐ શ્રી સર્વયોગકલોદ્‌ભાસિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૨૯</div><div> ૐ શ્રી સ્વતંત્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૩૦</div><div> ૐ શ્રી સર્વવેદે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૩૧</div><div> ૐ શ્રી વશિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૩૨</div><div> ૐ શ્રી કૃષ્ણાત્મને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૩૩</div><div> ૐ શ્રી આકૃષ્ટહૃદયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૩૪</div><div> ૐ શ્રી દેશિકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૩૫</div><div> ૐ શ્રી દિવ્યદર્શનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૩૬</div><div> ૐ શ્રી ગોલોકરમણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૩૭</div><div> ૐ શ્રી બ્રહ્મક્રીડાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૩૮</div><div> ૐ શ્રી વૈકુંઠનાયકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૩૯</div><div> ૐ શ્રી અનેકમૂર્તયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૪૦</div><div> ૐ શ્રી અંડસ્થાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૪૧</div><div> ૐ શ્રી બહિઃસ્થાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૪૨</div><div> ૐ શ્રી યોગશિક્ષકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૪૩</div><div> ૐ શ્રી પુરઃસરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૪૪</div><div> ૐ શ્રી મનોવેગાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૪૫</div><div> ૐ શ્રી સ્વનેત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૪૬</div><div> ૐ શ્રી દર્શિતામરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૪૭</div><div> ૐ શ્રી વિષ્ણુયાગસમારંભાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૪૮</div><div> ૐ શ્રી ષણ્માસાશિતવાડવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૪૯</div><div> ૐ શ્રી નાનાદેશગતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૫૦</div><div> ૐ શ્રી નાનાયજ્ઞકૃતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૫૧</div><div> ૐ શ્રી ભૂરિદક્ષિણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૫૨</div><div> ૐ શ્રી સદ્યઃસમાધયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૫૩</div><div> ૐ શ્રી સર્વાત્મને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૫૪</div><div> ૐ શ્રી નિરીશમતખંડનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૫૫</div><div> ૐ શ્રી મકારપંચકોચ્છેત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૫૬</div><div> ૐ શ્રી ધર્મસર્ગપ્રપોષકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૫૭</div><div> ૐ શ્રી પાપિકૃતાન્તાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૫૮</div><div> ૐ શ્રી પરમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૫૯</div><div> ૐ શ્રી પુણ્યકીર્તયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૬૦</div><div> ૐ શ્રી પૃથુશ્રવસે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૬૧</div><div> ૐ શ્રી કૃશોદ્ધવાધ્વસંપોષ્ટ્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૬૨</div><div> ૐ શ્રી સાધ્વીધર્મપ્રવર્તકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૬૩</div><div> ૐ શ્રી દૈત્યાંશગુરુખદ્યોતભાસ્કરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૬૪</div><div> ૐ શ્રી ધર્મધારકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૬૫</div><div> ૐ શ્રી લોભાદિદોષગદિત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૬૬</div><div> ૐ શ્રી તામસવ્રતવર્જનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૬૭</div><div> ૐ શ્રી સુવ્રતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૬૮</div><div> ૐ શ્રી સિદ્ધિદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૬૯</div><div> ૐ શ્રી સિદ્ધાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૭૦</div><div> ૐ શ્રી સિદ્ધેશાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૭૧</div><div> ૐ શ્રી સિદ્ધિપાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૭૨</div><div> ૐ શ્રી અચ્યુતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૭૩</div><div> ૐ શ્રી કૌલાધ્વશાપદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૭૪</div><div> ૐ શ્રી પ્રોક્તાસુરલક્ષ્મણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૭૫</div><div> ૐ શ્રી અસુરાતિગાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૭૬</div><div> ૐ શ્રી ભુજંગનગરાનંદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૭૭</div><div> ૐ શ્રી નિજભક્તસ્તુતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૭૮</div><div> ૐ શ્રી મહતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૭૯</div><div> ૐ શ્રી અહિંસાસ્થાપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૮૦</div><div> ૐ શ્રી ભૂરિનિજૈશ્વર્યપ્રદર્શકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૮૧</div><div> ૐ શ્રી દૂરદેશસ્થઆત્મભક્તદત્તસાક્ષાત્સ્વદર્શનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૮૨</div><div> ૐ શ્રી સચ્છાસ્ત્રોદિતસત્કીર્તયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૮૩</div><div> ૐ શ્રી આત્યંતિકગતિપ્રદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૮૪</div><div> ૐ શ્રી પરાલ્પરોષકારાતિસ્મરણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૮૫</div><div> ૐ શ્રી સર્વભાવવિદે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૮૬</div><div> ૐ શ્રી પરાપકારસાહગ્રવિસ્મૃતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૮૭</div><div> ૐ શ્રી કોમલાન્તરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૮૮</div><div> ૐ શ્રી પાષંડરક્ષિતાત્મીયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૮૯</div><div> ૐ શ્રી દૈત્યમોહનચેષ્ટિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૯૦</div><div> ૐ શ્રી અખંડિતાર્ષમર્યાદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૯૧</div><div> ૐ શ્રી પરગુહ્યાપ્રકાશકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૯૨</div><div> ૐ શ્રી પાત્રાર્પિતબહુદ્રવ્ય્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૯૩</div><div> ૐ શ્રી યથાયુક્તોપદેશકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૯૪</div><div> ૐ શ્રી અવિગ્રહપ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૯૫</div><div> ૐ શ્રી વાણીદંડપારુષ્યવર્જિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૯૬</div><div> ૐ શ્રી બ્રહ્મણ્યદેવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૯૭</div><div> ૐ શ્રી દેવેજ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૯૮</div><div> ૐ શ્રી દશરૂપપ્રદર્શકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૪૯૯</div><div> ૐ શ્રી અકુંઠિતવચસે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૦૦</div><div> ૐ શ્રી દેશાચારજ્ઞાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૦૧</div><div> ૐ શ્રી અનાદૃતોદ્ધતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૦૨</div><div> ૐ શ્રી શિક્ષાર્થક્ષણરુપે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૦૩</div><div> ૐ શ્રી નિત્યમૈત્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૦૪</div><div> ૐ શ્રી સચ્છાસ્ત્રસંગ્રહિણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૦૫</div><div> ૐ શ્રી ધર્મિપક્ષાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૦૬</div><div> ૐ શ્રી સાધુસેવિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૦૭</div><div> ૐ શ્રી પુણ્યશ્રવણકીર્તનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૦૮</div><div> ૐ શ્રી પ્રણતાર્તિહરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૦૯</div><div> ૐ શ્રી પૂજ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૧૦</div><div> ૐ શ્રી વિષયાસક્તનિંદકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૧૧</div><div> ૐ શ્રી ભક્તદેહાન્તસમયદત્તદિવ્યસ્વદર્શનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૧૨</div><div> ૐ શ્રી યમદૂતવિતસ્વીયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૧૩</div><div> ૐ શ્રી નરાકાર્તિનિવારકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૧૪</div><div> ૐ શ્રી સન્માર્ગવર્તિાશેષસ્વાશ્રિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૧૫</div><div> ૐ શ્રી શીઘ્રસિદ્ધિદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૧૬</div><div> ૐ શ્રી અનાથરોગવૃદ્ધાર્ભભિક્ષુપોષણકારકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૧૭</div><div> ૐ શ્રી ગૂઢાશયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૧૮</div><div> ૐ શ્રી ગૂઢ મંત્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૧૯</div><div> ૐ શ્રી સર્વજીવાપ્રતારકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૨૦</div><div> ૐ શ્રી ભક્તાસદ્વાસનોચ્છેત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૨૧</div><div> ૐ શ્રી અસદાગ્રહવિવર્જિનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૨૨</div><div> ૐ શ્રી પોષ્યવર્ગાનુવિહિતતત્સમાનમિતાશનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૨૩</div><div> ૐ શ્રી આપત્કાલાત્યક્તનિજાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૨૪</div><div> ૐ શ્રી પંચકાલાર્ચિતાચ્યુતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૨૫</div><div> ૐ શ્રી યોગેશ્વરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૨૬</div><div> ૐ શ્રી મુનિપતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૨૭</div><div> ૐ શ્રી નિત્યમુક્તાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૨૮</div><div> ૐ શ્રી મહામુનયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૨૯</div><div> ૐ શ્રી બૌદ્ધાદિનાસ્તિકમતખંડનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૩૦</div><div> ૐ શ્રી પંડિતાર્ચિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૩૧</div><div> ૐ શ્રી અહિંસયજ્ઞપ્રસ્તોત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૩૨</div><div> ૐ શ્રી વૈષ્ણવક્રતુકારકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૩૩</div><div> ૐ શ્રી મદ્યમાંસસુરાગંધાઘ્રાણશુદ્ધિવિધાપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૩૪</div><div> ૐ શ્રી મત્તોન્મત્તખલાવાદિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૩૫</div><div> ૐ શ્રી પુરસ્કૃતગુણાધિકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૩૬</div><div> ૐ શ્રી નાનાભક્તજનાનંદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૩૭</div><div> ૐ શ્રી સદસદ્‌વ્યક્તિદર્શકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૩૮</div><div> ૐ શ્રી ભૃગુનંદીશશાપાર્તજનરક્ષકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૩૯</div><div> ૐ શ્રી ઉત્તમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૪૦</div><div> ૐ શ્રી વેદવિદે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૪૧</div><div> ૐ શ્રી શાસ્ત્રવિદે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૪૨</div><div> ૐ શ્રી વાદિદુર્જેયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૪૩</div><div> ૐ શ્રી હૃતસંશયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૪૪</div><div> ૐ શ્રી ખટ્‌વાંગાત્મને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૪૫</div><div> ૐ શ્રી હૃદંભોજધ્યેયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૪૬</div><div> ૐ શ્રી ધ્યાતૃમનોહરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૪૭</div><div> ૐ શ્રી જ્યોતિઃસંસ્થાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૪૮</div><div> ૐ શ્રી અતિરમ્યાંગાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૪૯</div><div> ૐ શ્રી સુરેખારુણપત્તલાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૫૦</div><div> ૐ શ્રી ચાર્વંગુલયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૫૧</div><div> ૐ શ્રી નખેંદ્વાલિપ્રભાપહૃતહૃતમસે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૫૨</div><div> ૐ શ્રી પદ્મકોશાતિમૃદુલચરણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૫૩</div><div> ૐ શ્રી તુંગગુલ્ફકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૫૪</div><div> ૐ શ્રી હ્રસ્વજંઘાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૫૫</div><div> ૐ શ્રી વૃત્તજાનવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૫૬</div><div> ૐ શ્રી સમોરવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૫૭</div><div> ૐ શ્રી સત્સિતાંશુકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૫૮</div><div> ૐ શ્રી ગંભીરનાભયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૫૯</div><div> ૐ શ્રી આજાનુભુજાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૬૦</div><div> ૐ શ્રી તતભુજાંતરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૬૧</div><div> ૐ શ્રી કંઠલંબિતહારાલયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૬૨</div><div> ૐ શ્રી કંબુકંઠાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૬૩</div><div> ૐ શ્રી અરુણાધરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૬૪</div><div> ૐ શ્રી પ્રફુલ્લપદ્મવદનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૬૫</div><div> ૐ શ્રી કુંદદંતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૬૬</div><div> ૐ શ્રી મિતસ્મિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૬૭</div><div> ૐ શ્રી તિલપુષ્પાભનાસાંતશ્યામબિંદવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૬૮</div><div> ૐ શ્રી સમશ્રવસે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૬૯</div><div> ૐ શ્રી વામશ્રવોતરશ્યામબિંદવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૭૦</div><div> ૐ શ્રી પદ્મલેક્ષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૭૧</div><div> ૐ શ્રી વિશાલભાલતિલકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૭૨</div><div> ૐ શ્રી સૂક્ષ્મવક્રશિરોરુહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૭૩</div><div> ૐ શ્રી શિરઃપટલત્પુષ્પાપીજરાજયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૭૪</div><div> ૐ શ્રી સ્વભક્તદૃશે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૭૫</div><div> ૐ શ્રી અવતારિણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૭૬</div><div> ૐ શ્રી ભયત્રાત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૭૭</div><div> ૐ શ્રી અભયરાજવરપ્રદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૭૮</div><div> ૐ શ્રી કૃતદુર્ગપુરાવાસાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૭૯</div><div> ૐ શ્રી ક્રોધયંત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૮૦</div><div> ૐ શ્રી અદ્‌ભૂતક્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૮૧</div><div> ૐ શ્રી નાનાદેશપ્રેષિતસ્વભક્તનાશિતદુષ્ક્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૮૨</div><div> ૐ શ્રી અસુરક્લિષ્ટસત્સંગસાંત્વનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૮૩</div><div> ૐ શ્રી સાધુવલ્લભાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૮૪</div><div> ૐ શ્રી સદ્દદ્રોહિગુરુપાલશિક્ષકક્ષ્મેરાજ્યદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૮૫</div><div> ૐ શ્રી ગર્વેન્દ્રાર્ચિતપાદામ્બજાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૮૬</div><div> ૐ શ્રી ગવેન્દ્રવરદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૮૭</div><div> ૐ શ્રી અનઘાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૮૮</div><div> ૐ શ્રી ભક્તત્રાત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૮૯</div><div> ૐ શ્રી ઉદ્ધવસ્વામિસંપ્રદાયપ્રકાશકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૯૦</div><div> ૐ શ્રી વિપ્રપ્રશંસનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૯૧</div><div> ૐ શ્રી તીર્થવિધિબોધકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૯૨</div><div> ૐ શ્રી આર્તિહૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૯૩</div><div> ૐ શ્રી વિપ્રસંતપર્ણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૯૪</div><div> ૐ શ્રી નાનાવ્રતવક્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૯૫</div><div> ૐ શ્રી મહાયશસે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૯૬</div><div> ૐ શ્રી કૌલોચ્છિદે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૯૭</div><div> ૐ શ્રી વિજયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૯૮</div><div> ૐ શ્રી વર્ણ્યવિષ્ણુયાગમહોત્સવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૫૯૯</div><div> ૐ શ્રી ભક્તિગમ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૦૦</div><div> ૐ શ્રી ભક્તવશાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૦૧</div><div> ૐ શ્રી કૃતદિગ્વિજયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૦૨</div><div> ૐ શ્રી અક્ષયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૦૩</div><div> ૐ શ્રી ભક્તિધર્મકૃતાનન્દાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૦૪</div><div> ૐ શ્રી સર્વમંગલદર્શનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૦૫</div><div> ૐ શ્રી ઉત્તમાત્મને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૦૬</div><div> ૐ શ્રી જ્યાપ્રેષ્ઠાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૦૭</div><div> ૐ શ્રી લલિતેષ્ટવરપ્રદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૦૮</div><div> ૐ શ્રી મુકુંદસેવાસંતુષ્ટાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૦૯</div><div> ૐ શ્રી જયાનીતપયઃપિબાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૧૦</div><div> ૐ શ્રી નારાયણધૃતામત્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૧૧</div><div> ૐ શ્રી વાસુદેવત્તચંદનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૧૨</div><div> ૐ શ્રી ગોપાલમંજિતામત્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૧૩</div><div> ૐ શ્રી અખંડાપ્તાર્ચનસાધનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૧૪</div><div> ૐ શ્રી ઉમાનાછઆપ્તપુષ્પાદયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૧૫</div><div> ૐ શ્રી જયપ્રક્ષાલિતાંબરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૧૬</div><div> ૐ શ્રી લલિતાસંસ્કૃતાન્નાદયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૧૭</div><div> ૐ શ્રી પંચાલ્યાલિપ્તપાકભુવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૧૮</div><div> ૐ શ્રી અવરામાર્જિતાવાસાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૧૯</div><div> ૐ શ્રી શિવોપાનીતપાદુકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૨૦</div><div> ૐ શ્રી દયગોવિંદાપ્તવન્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૨૧</div><div> ૐ શ્રી મયરામાવિતાંબરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૨૨</div><div> ૐ શ્રી પ્રયાગોાક્તપુરાણાદયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૨૩</div><div> ૐ શ્રી નિશાનિત્યકથાદરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૨૪</div><div> ૐ શ્રી મુક્તબ્રહ્મસ્તુતયશસે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૨૫</div><div> ૐ શ્રી પ્રેમગીતગુણશ્રુતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૨૬</div><div> ૐ શ્રી મહાનુભાવમુદિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૨૭</div><div> ૐ શ્રી શુકરક્ષિતપુસ્તકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૨૮</div><div> ૐ શ્રી આનંદકલ્પિતાવાસાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૨૯</div><div> ૐ શ્રી સોમસૂરાદિપાર્ષદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૩૦</div><div> ૐ શ્રી ય્રાાર્હકારિતાત્મીયસેવનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૩૧</div><div> ૐ શ્રી ભક્તકામદુહે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૩૨</div><div> ૐ શ્રી નિબદ્ધોત્સવપર્યાયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૩૩</div><div> ૐ શ્રી વિજયોત્સવતોષિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૩૪</div><div> ૐ શ્રી અન્નકુટકૃતાનુજ્ઞાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૩૫</div><div> ૐ શ્રી મહાસંભારહારકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૩૬</div><div> ૐ શ્રી પત્રદૂતાહૂતભક્તાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૩૭</div><div> ૐ શ્રી પાકશાનાવલોકનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૩૮</div><div> ૐ શ્રી પ્રત્યુદ્‌ગતમુનિવ્રતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૩૯</div><div> ૐ શ્રી માનિતાખિલવૈષ્ણવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૪૦</div><div> ૐ શ્રી સત્પ્રીણનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૪૧</div><div> ૐ શ્રી ક્ષણસ્વાપાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૪૨</div><div> ૐ શ્રી દીપાલીમંગલાપ્લવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૪૩</div><div> ૐ શ્રી બ્રાહ્મક્ષણાશુવિહિતનૈત્યકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૪૪</div><div> ૐ શ્રી અખિલધર્મવેદિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૪૫</div><div> ૐ શ્રી ચારુચક્રકપીઠસ્થાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૪૬</div><div> ૐ શ્રી ઉત્તમક્ષ્મેશપૂજિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૪૭</div><div> ૐ શ્રી ભક્તસ્વેક્ષાપ્રદાનોત્કાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૪૮</div><div> ૐ શ્રી મયરામેક્ષણસ્મિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૪૯</div><div> ૐ શ્રી ભક્તસંપ્રીણનધૃતનૂતનાંશુકભૂષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૫૦</div><div> ૐ શ્રી અનર્ઘ્યપીતકૌશેયપરિધાનવિચક્ષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૫૧</div><div> ૐ શ્રી મુકુટાકૃતિબંદ્ધશોણશીર્ષપટદ્યુતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૫૨</div><div> ૐ શ્રી સસ્વર્ણબિન્દુકૌસુંભસત્કંચુકધૃતિપ્રભાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૫૩</div><div> ૐ શ્રી સ્કંધોલ્લસદ્ધૈમપટાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૫૪</div><div> ૐ શ્રી કટિબદ્ધારુણાંશુકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૫૫</div><div> ૐ શ્રી હેમાંગદલસદ્‌બાહવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૫૬</div><div> ૐ શ્રી કર્ણશોભિતકુંડલાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૫૭</div><div> ૐ શ્રી કંઠલંબિતસસ્વર્ણમુક્તાહારાલિશોભનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૫૮</div><div> ૐ શ્રી ચંચત્સુવર્ણકટકશૃંખલાયકરદ્વયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૫૯</div><div> ૐ શ્રી સદ્રત્નખચિતસ્વર્ણમુદ્રિકાશોભિતાંગુલયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૬૦</div><div> ૐ શ્રી સત્કેસરોર્ધ્વતિલકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૬૧</div><div> ૐ શ્રી સરક્તાક્ષતચન્દ્રકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૬૨</div><div> ૐ શ્રી અવંતસોલ્લસત્કર્ણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૬૩</div><div> ૐ શ્રી ચલત્કૌસુમશેખરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૬૪</div><div> ૐ શ્રી સુગંધિપુષ્પહારાલિદર્શનીયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૬૫</div><div> ૐ શ્રી મનોહરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૬૬</div><div> ૐ શ્રી ગજેન્દ્રગમનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૬૭</div><div> ૐ શ્રી અર્કાંશુચંચદ્વાસસે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૬૮</div><div> ૐ શ્રી સ્મિતાનનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૬૯</div><div> ૐ શ્રી ઉચ્ચરમ્યાસનાસીનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૭૦</div><div> ૐ શ્રી મુનિમંડલમધ્યગાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૭૧</div><div> ૐ શ્રી સોમવર્મોદ્‌ધૃતછત્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૭૨</div><div> ૐ શ્રી મુકુંદધૃતનક્તકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૭૩</div><div> ૐ શ્રી અલયભૃગુજિદ્રત્નદંડચામરવીજિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૭૪</div><div> ૐ શ્રી સૂરનાંજાત્તવ્યજનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૭૫</div><div> ૐ શ્રી જપમાલાલસત્કરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૭૬</div><div> ૐ શ્રી ઉશીરચારુવ્યજનકરોત્તમકૃતાદરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૭૭</div><div> ૐ શ્રી સ્વેક્ષણાનન્દિતસ્વીયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૭૮</div><div> ૐ શ્રી શ્રુતકીર્તયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૭૯</div><div> ૐ શ્રી નિજાર્ચિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૮૦</div><div> ૐ શ્રી વિપ્રસાત્કૃતવિત્તૌઘાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૮૧</div><div> ૐ શ્રી દાનશૂરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૮૨</div><div> ૐ શ્રી નિરેષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૮૩</div><div> ૐ શ્રી ઉન્મત્તગંગાપ્લવનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૮૪</div><div> ૐ શ્રી દીપાવલિમહોત્સવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૮૫</div><div> ૐ શ્રી નિત્યકર્માદરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૮૬</div><div> ૐ શ્રી નૂત્નવસનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૮૭</div><div> ૐ શ્રી દીનવત્સલાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૮૮</div><div> ૐ શ્રી સદર્ચિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૮૯</div><div> ૐ શ્રી અન્નકૂટેક્ષાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૯૦</div><div> ૐ શ્રી રમારંજનભોજનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૯૧</div><div> ૐ શ્રી સદાશનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૯૨</div><div> ૐ શ્રી બદ્ધકટયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૯૩</div><div> ૐ શ્રી સ્વભક્તપરિવેષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૯૪</div><div> ૐ શ્રી ભક્તભુક્તીક્ષણાનંદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૯૫</div><div> ૐ શ્રી સદાનંદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૯૬</div><div> ૐ શ્રી મહાશયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૯૭</div><div> ૐ શ્રી સત્સંગદીપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૯૮</div><div> ૐ શ્રી ભક્તશિક્ષાદક્ષાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૬૯૯</div><div> ૐ શ્રી ઉરુક્રમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૦૦</div><div> ૐ શ્રી ધર્મરક્ષકરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૦૧</div><div> ૐ શ્રી સ્પર્શવિવેકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૦૨</div><div> ૐ શ્રી ધર્મસિદ્ધિદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૦૩</div><div> ૐ શ્રી નિષ્કામસિદ્ધિદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૦૪</div><div> ૐ શ્રી ત્યાગિસેવ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૦૫</div><div> ૐ શ્રી અદ્વૈતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૦૬</div><div> ૐ શ્રી જયપ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૦૭</div><div> ૐ શ્રી એકાદશીવ્રતવિધિપ્રવક્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૦૮</div><div> ૐ શ્રી એકાદશીશ્વરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૦૯</div><div> ૐ શ્રી પ્રબોધનીવ્રતાચારાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૧૦</div><div> ૐ શ્રી મહાદાનપ્રતોષિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૧૧</div><div> ૐ શ્રી મુનિપ્રતોષાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૧૨</div><div> ૐ શ્રી વિદુરનીતિશાસ્ત્રપ્રશંસનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૧૩</div><div> ૐ શ્રી અક્ષરસ્થાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૧૪</div><div> ૐ શ્રી મુનિવ્રાતસ્તુતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૧૫</div><div> ૐ શ્રી યોષિદ્‌ગણેડિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૧૬</div><div> ૐ શ્રી ભક્ત્યેકતોષ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૧૭</div><div> ૐ શ્રી ભક્ત્યાત્મને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૧૮</div><div> ૐ શ્રી ભક્તગ્રામમહોત્સવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૧૯</div><div> ૐ શ્રી વૃત્તાલયપુરાવાસાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૨૦</div><div> ૐ શ્રી ભક્તસંઘસુખપ્રદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૨૧</div><div> ૐ શ્રી પ્રાપ્તસ્વબંધુસન્માનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૨૨</div><div> ૐ શ્રી ભૂરિતર્પિતપાર્ષદા નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૨૩</div><div> ૐ શ્રી ગંગાર્પિતફલાહારાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૨૪</div><div> ૐ શ્રી ભક્તસંઘસમર્ચિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૨૫</div><div> ૐ શ્રી નાનાદેશીયભક્તૌઘાર્પિતવિત્તૌઘદાન્તકૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૨૬</div><div> ૐ શ્રી ભક્તભ્રાતૃદ્વાસપર્યાયકૃતભોજનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૨૭</div><div> ૐ શ્રી દોલોત્મવવિદ્યાનજ્ઞાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૨૮</div><div> ૐ શ્રી નરનારાયણર્ચકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૨૯</div><div> ૐ શ્રી રંગક્રીડનકૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૩૦</div><div> ૐ શ્રી મુક્તકામચારનિષેશકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૩૧</div><div> ૐ શ્રી સ્ત્રીપુંપ્રસંગભૂર્યાપ્રદર્શકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૩૨</div><div> ૐ શ્રી ધર્મદેશીકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૩૩</div><div> ૐ શ્રી સાષ્ટાજ્રબ્રહ્મચૈકસ્થાપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૩૪</div><div> ૐ શ્રી ધર્મવિત્તમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૩૫</div><div> ૐ શ્રી ગૃહીતરનસ્ત્રયંગસ્પર્શદોષપ્રકાશકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૩૬</div><div> ૐ શ્રી સ્ત્રીપુંસાન્યોન્યસંસ્પર્શવ્યવસ્થાકૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૩૭</div><div> ૐ શ્રી વિદાંવરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૩૮</div><div> ૐ શ્રી આહારશુદ્ધિકૃતિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૩૯</div><div> ૐ શ્રી સદ્યઃપાપનિષ્કૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૪૦</div><div> ૐ શ્રી વેદાન્તતત્ત્વપ્રથનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૪૧</div><div> ૐ શ્રી સાંખ્યયોગાર્થદર્શકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૪૨</div><div> ૐ શ્રી અદાંભિકપ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૪૩</div><div> ૐ શ્રી અતૃષ્ણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૪૪</div><div> ૐ શ્રી ગુણગ્રાહિણે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૪૫</div><div> ૐ શ્રી ગુણપ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૪૬</div><div> ૐ શ્રી પુરાણશ્રવણોત્સુકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૪૭</div><div> ૐ શ્રી પુરાણવિધિબોધકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૪૮</div><div> ૐ શ્રી શ્રીમદ્‌ભાગવતશ્રોત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૪૯</div><div> ૐ શ્રી શ્રીમદ્‌ભાગવતાભિજ્ઞાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૫૦</div><div> ૐ શ્રી શ્રીમદ્‌ભાગવતાર્પકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૫૧</div><div> ૐ શ્રી શ્રીમદ્‌ભાગવતોત્કૃષ્ટપુરશ્ચરણકારકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૫૨</div><div> ૐ શ્રી જન્માષ્ટમ્યુત્સવાપૂર્ણજીવવર્મમનોરથાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૫૩</div><div> ૐ શ્રી કાર્યાયનનરાનંદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૫૪</div><div> ૐ શ્રી વાસ્તુવેશ્મનિકેતનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૫૫</div><div> ૐ શ્રી સૂરસંભાવનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૫૬</div><div> ૐ શ્રી શાકસંસ્કારાનંદિતસ્વકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૫૭</div><div> ૐ શ્રી નાગટંકજનપ્રીયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૫૮</div><div> ૐ શ્રી શુકપ્રશ્નકૃતોત્તરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૫૯</div><div> ૐ શ્રી ચાંદ્રાયણવ્રતારાધ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૬૦</div><div> ૐ શ્રી પંચાલજનપાવનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૬૧</div><div> ૐ શ્રી શિવરાત્રિવ્રતાચરણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૬૨</div><div> ૐ શ્રી કૃતદોલામહોત્સવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૬૩</div><div> ૐ શ્રી કૃતદોલામહોત્સવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૬૪</div><div> ૐ શ્રી દ્વૈતાદ્વૈતાર્થનિગમહાર્દબોધિને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૬૫</div><div> ૐ શ્રી મહોદયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૬૬</div><div> ૐ શ્રી દિવ્યાંગભક્તિધર્માદિરૂપપ્રેક્ષયિત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૬૭</div><div> ૐ શ્રી અમૃતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૬૮</div><div> ૐ શ્રી હેમંતાર્ચાસ્તુતિપ્રીયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૬૯</div><div> ૐ શ્રી જીર્ણદુર્ગજનાર્ચિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૭૦</div><div> ૐ શ્રી કૃતતીર્થવિધયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૭૧</div><div> ૐ શ્રી વિપ્રભોજનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૭૨</div><div> ૐ શ્રી ભૂરિદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૭૩</div><div> ૐ શ્રી અભવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૭૪</div><div> ૐ શ્રી દુર્ગભક્તાતિસુખદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૭૫</div><div> ૐ શ્રી કૃતકૃત્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૭૬</div><div> ૐ શ્રી જગત્પતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૭૭</div><div> ૐ શ્રી રહઃસ્થાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૭૮</div><div> ૐ શ્રી ગૂઢસંકલ્પાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૭૯</div><div> ૐ શ્રી હરિમંદિરકારાકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૮૦</div><div> ૐ શ્રી મહારંભાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૮૧</div><div> ૐ શ્રી સદાસ્વસ્થાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૮૨</div><div> ૐ શ્રી કલિદોષહરોદ્યમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૮૩</div><div> ૐ શ્રી કૃતશ્રીનગરવાસાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૮૪</div><div> ૐ શ્રી મહાસંભારસાધકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૮૫</div><div> ૐ શ્રી શ્રીપુરેશાર્હિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૮૬</div><div> ૐ શ્રી સભ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૮૭</div><div> ૐ શ્રી પૂર્તકર્મપ્રશંસકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૮૮</div><div> ૐ શ્રી નરનારાયણાર્ચાસંસ્થાપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૮૯</div><div> ૐ શ્રી પૌરમાનિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૯૦</div><div> ૐ શ્રી ક્ષેત્રમાહાત્મ્યગદિત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૯૧</div><div> ૐ શ્રી મહોત્સવવિધાપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૯૨</div><div> ૐ શ્રી એકાહભોજિતાશેષપૌરવિપ્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૯૩</div><div> ૐ શ્રી બહુપ્રદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૯૪</div><div> ૐ શ્રી પૂજોત્સવવ્યવસ્થાકૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૯૫</div><div> ૐ શ્રી ગાંગેયપ્રાર્થિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૯૬</div><div> ૐ શ્રી મનવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૯૭</div><div> ૐ શ્રી ભુજંગપુરભક્તાતિપ્રીયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૯૮</div><div> ૐ શ્રી પૌરપ્રપૂજિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૭૯૯</div><div> ૐ શ્રી નરનારાયણપ્રતિષ્ઠાપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૦૦</div><div> ૐ શ્રી વિપ્રપૂજકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૦૧</div><div> ૐ શ્રી નિબદ્ધોત્સવમર્યાદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૦૨</div><div> ૐ શ્રી ભક્તાભીષ્ટફલપ્રદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૦૩</div><div> ૐ શ્રી વૃત્તાલયાક્ષિપદ્માર્કાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૦૪</div><div> ૐ શ્રી શિલ્પિસન્માનકારકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૦૫</div><div> ૐ શ્રી લક્ષ્મીનારાયણાદ્યર્ચાસ્થાપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૦૬</div><div> ૐ શ્રી અર્ચિતભૂસુરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૦૭</div><div> ૐ શ્રી મુક્તાદિષ્ટોત્પથછેદકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૦૮</div><div> ૐ શ્રી ચિત્રાર્ચાર્ચાપ્રવર્તકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૦૯</div><div> ૐ શ્રી દ્વારિકાપ્રેષિતસુહૃદે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૧૦</div><div> ૐ શ્રી તીર્થવાસ્યઘદર્શકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૧૧</div><div> ૐ શ્રી સત્ત્રાત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૧૨</div><div> ૐ શ્રી દ્વારિકેશાત્મને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૧૩</div><div> ૐ શ્રી ભક્તાપદ્દર્શનક્ષમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૧૪</div><div> ૐ શ્રી સચ્ચિદાનંદવરદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૧૫</div><div> ૐ શ્રી લક્ષ્મીનારાયણાત્મકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૧૬</div><div> ૐ શ્રી વર્ધિતક્ષેત્રમાહાત્મ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૧૭</div><div> ૐ શ્રી તપ્તમુદ્રાંકિતસ્વકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૧૮</div><div> ૐ શ્રી મુક્તાત્મને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૧૯</div><div> ૐ શ્રી ત્રિયુગાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૨૦</div><div> ૐ શ્રી વાદિજેત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૨૧</div><div> ૐ શ્રી અનુયુગસંભવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૨૨</div><div> ૐ શ્રી અસુરાવિદિતેશત્વાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૨૩</div><div> ૐ શ્રી પ્રકટેશ્વરલક્ષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૨૪</div><div> ૐ શ્રી અંતઃસંશયહૃદ્વાર્તાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૨૫</div><div> ૐ શ્રી દુરાચારવિમોચનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૨૬</div><div> ૐ શ્રી અશસ્ત્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૨૭</div><div> ૐ શ્રી ધિષણાસ્ત્રાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૨૮</div><div> ૐ શ્રી આસુરાવેશકર્ષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૨૯</div><div> ૐ શ્રી લડ્ડુકાદીષ્ટગણપાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૩૦</div><div> ૐ શ્રી સિંદૂરાદીષ્ટમારુતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૩૧</div><div> ૐ શ્રી વૃત્તાલયપ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૩૨</div><div> ૐ શ્રી ધર્મજન્માહાર્ચિતસદિ્‌દ્વજાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૩૩</div><div> ૐ શ્રી મહાસભાસનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૩૪</div><div> ૐ શ્રી દત્તવિધ્યુપાત્તસુતદ્વયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૩૫</div><div> ૐ શ્રી પુત્રવિન્યસ્તગુરુતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૩૬</div><div> ૐ શ્રી પુત્રસાત્કૃતસંશ્રિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૩૭</div><div> ૐ શ્રી સદોવિભક્તદેશાદયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૩૮</div><div> ૐ શ્રી સમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૩૯</div><div> ૐ શ્રી આચાર્યશિક્ષકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૪૦</div><div> ૐ શ્રી ભક્તિજન્માહભક્તૌઘતર્પણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૪૧</div><div> ૐ શ્રી ચિત્રિતાધિપાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૪૨</div><div> ૐ શ્રી નૃપામાત્યાર્થિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૪૩</div><div> ૐ શ્રી પૌરપ્રીતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૪૪</div><div> ૐ શ્રી વટપુરાગમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૪૫</div><div> ૐ શ્રી મંત્રિપ્રત્યુદ્‌ગતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૪૬</div><div> ૐ શ્રી નાનાવાદ્યવાદકસંવૃતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૪૭</div><div> ૐ શ્રી સાલંકારગજારૂઢાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૪૮</div><div> ૐ શ્રી ચારુચામરવીજિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૪૯</div><div> ૐ શ્રી દૃક્પાવિતજનવ્રતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૫૦</div><div> ૐ શ્રી સિંહજિન્નૃપપૂજિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૫૧</div><div> ૐ શ્રી સ્વપ્રતાપપરાભૂતવિદ્વદ્વૈરિકૃતાનતયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૫૨</div><div> ૐ શ્રી સિંહજિત્સંશયચ્છેત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૫૩</div><div> ૐ શ્રી ભક્તરીતિપ્રદર્શકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૫૪</div><div> ૐ શ્રી રઘુવીરાર્પિતસ્વીયભૂષાવિત્તનવાંશુકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૫૫</div><div> ૐ શ્રી સર્વજીવહિતાવહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૫૬</div><div> ૐ શ્રી સર્વસચ્છાસ્ત્રરસદોહનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૫૭</div><div> ૐ શ્રી અનાકુલમનસે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૫૮</div><div> ૐ શ્રી શિક્ષાપત્રીલેખનકૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૫૯</div><div> ૐ શ્રી સ્વભુવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૬૦</div><div> ૐ શ્રી સામાન્યધર્મવચનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૬૧</div><div> ૐ શ્રી વિશેષવૃષવર્ણનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૬૨</div><div> ૐ શ્રી નિગમાદ્યષ્ટસચ્છાસ્ત્રાતિરુચયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૬૩</div><div> ૐ શ્રી શાસ્ત્રસારવિદે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૬૪</div><div> ૐ શ્રી વિશિષ્ટાદ્વૈતમતધૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૬૫</div><div> ૐ શ્રી સાકારબ્રહ્મવર્ણનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૬૬</div><div> ૐ શ્રી રામાનુજકૃતગ્રંથશ્રુતિપાઠપ્રવર્તકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૬૭</div><div> ૐ શ્રી ગૃહીતવિઠ્ઠલેશોક્તવ્રતોત્સવવિધયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૬૮</div><div> ૐ શ્રી સુધયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૬૯</div><div> ૐ શ્રી યથાધિકારસદ્ધર્મવક્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૭૦</div><div> ૐ શ્રી વૈદિકસમ્મતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૭૧</div><div> ૐ શ્રી શિક્ષાપત્રીસ્થાપિતસ્વમાહાત્મ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૭૨</div><div> ૐ શ્રી પાઠસિદ્ધિદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૭૩</div><div> ૐ શ્રી સદ્ધર્માતિપ્રવૃત્તીચ્છવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૭૪</div><div> ૐ શ્રી શિક્ષાપત્રીપ્રવર્તકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૭૫</div><div> ૐ શ્રી પ્રમોદિતાશ્રિતજનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૭૬</div><div> ૐ શ્રી નરનારાયણેક્ષણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૭૭</div><div> ૐ શ્રી મહાદોલોત્સવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૭૮</div><div> ૐ શ્રી અયોધ્યાપ્રસાદાર્પિતસદ્ધસવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૭૯</div><div> ૐ શ્રી ધૌરેયસ્થાપિતશ્રીમદ્‌રાધામદનમોહનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૮૦</div><div> ૐ શ્રી પુત્રોપદિષ્ટશ્રીકૃષ્ણમંત્રદીક્ષાવિધિક્રમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૮૧</div><div> ૐ શ્રી પ્રોક્તદીક્ષિતસદ્ધર્માય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૮૨</div><div> ૐ શ્રી કૃષ્ણપૂજાવિધાપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૮૩</div><div> ૐ શ્રી પ્રોક્તાપરાધનિર્હારાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૮૪</div><div> ૐ શ્રી ક્ષમાસારાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૮૫</div><div> ૐ શ્રી સદર્ચનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૮૬</div><div> ૐ શ્રી સ્ત્રાચાર્યપત્નીશિષ્યત્વસ્થાપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૮૭</div><div> ૐ શ્રી શિષ્યશાસનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૮૮</div><div> ૐ શ્રી પુત્રદત્તમહાદીક્ષાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૮૯</div><div> ૐ શ્રી પુત્રદીક્ષિતપૂરુષાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૯૦</div><div> ૐ શ્રી સ્નુષાદીક્ષિતયોષાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૯૧</div><div> ૐ શ્રી શ્રીરાધાકૃષ્ણેષ્ટદેવતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૯૨</div><div> ૐ શ્રી સત્સંગિધ્યેયસન્મૂર્તયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૯૩</div><div> ૐ શ્રી એકાન્તિપરાયણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૯૪</div><div> ૐ શ્રી પુત્રપ્રોક્તાબ્દિકાશેષવ્રતોત્સવવિધિક્રમાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૯૫</div><div> ૐ શ્રી ગોપાલપ્રશ્નસંહૃષ્ટાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૯૬</div><div> ૐ શ્રી ત્યાગિધર્મોપદેશકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૯૭</div><div> ૐ શ્રી લોભોન્મૂલનઘીદાત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૯૮</div><div> ૐ શ્રી કામોત્ખનનયુક્તિદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૮૯૯</div><div> ૐ શ્રી દુર્જેયરસજિદ્‌બોધાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૦૦</div><div> ૐ શ્રી નિઃસ્નેહત્વવિધાપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૦૧</div><div> ૐ શ્રી માનસર્પવિષત્રાત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૦૨</div><div> ૐ શ્રી કૃષ્ણૈકાન્તિકશંસનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૦૩</div><div> ૐ શ્રી સદ્ધર્મજ્ઞાનવૈરાગ્યભકિતબોધનપટવે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૦૪</div><div> ૐ શ્રીજ્ઞાનસ્વરૂપનિર્ણેત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૦૫</div><div> ૐ શ્રી નિયન્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૦૬</div><div> ૐ શ્રી પુરુષાત્મકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૦૭</div><div> ૐ શ્રી પ્રકૃતીશાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૦૮</div><div> ૐ શ્રી મહાકાલાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૦૯</div><div> ૐ શ્રી માયેશાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૧૦</div><div> ૐ શ્રી અવ્યાકૃતાત્મકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૧૧</div><div> ૐ શ્રી હિરણ્યગર્ભાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૧૨</div><div> ૐ શ્રી તત્ત્વાત્મને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૧૩</div><div> ૐ શ્રી તત્ત્વલક્ષણલક્ષકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૧૪</div><div> ૐ શ્રી વૈરાજાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૧૫</div><div> ૐ શ્રી અખિલવિશ્વાત્મને નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૧૬</div><div> ૐ શ્રી બુદ્ધિપ્રેરકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૧૭</div><div> ૐ શ્રી ઈશિત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૧૮</div><div> ૐ શ્રી જીવેશ્વરબ્રહ્મમાયારૂપયાથાર્થ્યબોધકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૧૯</div><div> ૐ શ્રી નિર્ગુણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૨૦</div><div> ૐ શ્રી ગુણવૃત્તિજ્ઞાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૨૧</div><div> ૐ શ્રી બદ્ધજીવવિમોચનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૨૨</div><div> ૐ શ્રી ભક્ત્યારાધ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૨૩</div><div> ૐ શ્રી મહાદેવાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૨૪</div><div> ૐ શ્રીજ્ઞેયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૨૫</div><div> ૐ શ્રી ધ્યેયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૨૬</div><div> ૐ શ્રી પ્રકાશકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૨૭</div><div> ૐ શ્રી શેષીકૃતાક્ષરપરશ્રીકૃષ્ણાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૨૮</div><div> ૐ શ્રી કાલકાલનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૨૯</div><div> ૐ શ્રી કૃષ્ણસેવાહીનમુક્તિચતુષ્કેચ્છાપહારકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૩૦</div><div> ૐ શ્રી આદિષ્ટસાંખ્યસિદ્ધાંતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૩૧</div><div> ૐ શ્રી નિજજ્ઞાનફલપ્રદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૩૨</div><div> ૐ શ્રી ઋૃષ્યાત્મકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૩૩</div><div> ૐ શ્રી ચતુર્વર્ણાશ્રમધર્મનિરૂપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૩૪</div><div> ૐ શ્રી ષટ્‌કર્મવિધિનિર્ણેત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૩૫</div><div> ૐ શ્રી ગાયત્રીમન્ત્રદૈવત્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૩૬</div><div> ૐ શ્રી સ્માર્તવક્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૩૭</div><div> ૐ શ્રી શ્રૌતવક્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૩૮</div><div> ૐ શ્રી વિપ્રધર્મવિશેષવિદે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૩૯</div><div> ૐ શ્રી જીવિકાવૃત્તિનિર્ણેત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૪૦</div><div> ૐ શ્રી હેયોપાદેયબોધકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૪૧</div><div> ૐ શ્રી આશૌચનિર્ણયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૪૨</div><div> ૐ શ્રી શ્રાદ્ધવિધિવક્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૪૩</div><div> ૐ શ્રી વિધિપ્રિયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૪૪</div><div> ૐ શ્રી કલિહેયાર્થનિર્ણેત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૪૫</div><div> ૐ શ્રી રાજધર્મનિરુપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૪૬</div><div> ૐ શ્રી પતિવ્રતાધર્મવક્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૪૭</div><div> ૐ શ્રી વિધવાધર્મરક્ષકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૪૮</div><div> ૐ શ્રી નાનાવ્રતસમારાધ્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૪૯</div><div> ૐ શ્રી પૂજાવિધ્યુપદેશકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૫૦</div><div> ૐ શ્રી સ્પર્શનિર્ણયકૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૫૧</div><div> ૐ શ્રી વાનપ્રસ્થધર્મપ્રદર્શકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૫૨</div><div> ૐ શ્રી સન્યાસધર્મગદિત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૫૩</div><div> ૐ શ્રી સાંગનિષ્કૃતિબોધકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૫૪</div><div> ૐ શ્રી જીર્ણદુર્ગસ્થાપિતશ્રીદ્વારિકેશાદયે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૫૫</div><div> ૐ શ્રી આત્મદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૫૬</div><div> ૐ શ્રી બ્રહ્મચારિધર્મવક્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૫૭</div><div> ૐ શ્રી બૃહદ્ધર્મમહાદરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૫૮</div><div> ૐ શ્રી દુર્ગાલયસ્થાપિતશ્રીગોપીનાથાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૫૯</div><div> ૐ શ્રી અખિલાર્થદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૬૦</div><div> ૐ શ્રી સહાંગયોગોપદેષ્ટ્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૬૧</div><div> ૐ શ્રી પિંડબ્રહ્માંડનિર્ણયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૬૨</div><div> ૐ શ્રી ભૂતસ્વરૂપનિર્ણેત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૬૩</div><div> ૐ શ્રી વાયુભેદનિરૂપકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૬૪</div><div> ૐ શ્રી કાલજ્ઞાનવદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૬૫</div><div> ૐ શ્રી યોગસિદ્ધિહેતુપ્રદર્શકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૬૬</div><div> ૐ શ્રી શતાનંદસ્તુતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૬૭</div><div> ૐ ૐ શ્રી સ્તુત્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૬૮</div><div> ૐ શ્રી ભક્તવાંછિતપૂરકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૬૯</div><div> ૐ શ્રી શિક્ષાપત્રીગ્રંથનકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૭૦</div><div> ૐ શ્રી શિક્ષાપત્રીવિધિપ્રવાચે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૭૧</div><div> ૐ શ્રી શિક્ષાપત્ર્યર્થસંતુષ્ટાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૭૨</div><div> ૐ શ્રી લીલાસંદર્ભકારકાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૭૩</div><div> ૐ શ્રી નિર્વાસનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૭૪</div><div> ૐ શ્રી તિરોધાનલીલાસંમોહિતાસુરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૭૫</div><div> ૐ શ્રી વૈમાનિકાવૃતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૭૬</div><div> ૐ શ્રી હૃષ્ટદેવવૃંદસમર્ચિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૭૭</div><div> ૐ શ્રી સ્વર્ચાપ્રાદુષ્કૃતૈશ્વર્યાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૭૮</div><div> ૐ શ્રી દત્તપ્રત્યક્ષદર્શનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૭૯</div><div> ૐ શ્રી ભક્તેક્ષાહસિતાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૮૦</div><div> ૐ શ્રી પુષ્પાદ્યુપાહર્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૮૧</div><div> ૐ શ્રી અન્નભોજનાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૮૨</div><div> ૐ શ્રી ક્ષીરપાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૮૩</div><div> ૐ શ્રી નીરપાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૮૪</div><div> ૐ શ્રી સ્વોપયાચકેષ્ટાશુસિદ્ધિદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૮૫</div><div> ૐ શ્રી પુત્રદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૮૬</div><div> ૐ શ્રી વિત્તદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૮૭</div><div> ૐ શ્રી વિદ્યાપ્રદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૮૮</div><div> ૐ શ્રી વૈરિભયાપહાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૮૯</div><div> ૐ શ્રી અપમૃત્યુહરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૯૦</div><div> ૐ શ્રી ભુક્તિપ્રદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૯૧</div><div> ૐ શ્રી મુક્તિપ્રદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૯૨</div><div> ૐ શ્રી આશ્રયાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૯૩</div><div> ૐ શ્રી ઐશ્વર્યદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૯૪</div><div> ૐ શ્રી રોગહરાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૯૫</div><div> ૐ શ્રીજ્ઞાનકૃતે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૯૬</div><div> ૐ શ્રી ભક્તિદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૯૭</div><div> ૐ શ્રી અધિપાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૯૮</div><div> ૐ શ્રી સમાધિદાય નમઃ</div></div>
+<div class="mantra-card"><div class="index">૯૯૯</div><div> ૐ શ્રી તમોહર્ત્રે નમઃ</div></div>
+<div class="mantra-card"><div class="index">૧૦૦૦</div><div> ૐ શ્રી સર્વમંગલમંગલાય નમઃ</div></div>
+
+      <div class="spacer" id="bottomSpace"></div>
+    </div>
+  </div>
+</div>
+
+<div class="controls-wrapper">
+  <div class="play-main" id="playBtn">
+    <span id="playIcon">▶</span> <span id="playText">Start</span>
+  </div>
+  <div class="fab" id="settingsBtn">⚙️</div>
+</div>
+
+<div class="panel" id="panel">
+  <div class="panel-header">Settings</div>
+  
+  <div class="setting-group">
+    <label><span>Font Size</span> <span id="fontVal">Medium</span></label>
+    <input type="range" id="fontSlider" min="14" max="36" value="24">
+  </div>
+  
+  <div class="setting-group">
+    <label><span>Flow Speed</span> <span id="speedVal">Normal</span></label>
+    <input type="range" id="speed" min="1" max="10" value="5">
+  </div>
+</div>
+
+<script>
+const scrollArea = document.getElementById("scrollArea");
+const list = document.getElementById("list");
+const playBtn = document.getElementById("playBtn");
+const playIcon = document.getElementById("playIcon");
+const playText = document.getElementById("playText");
+const speed = document.getElementById("speed");
+const fontSlider = document.getElementById("fontSlider");
+const darkToggle = document.getElementById("darkToggle");
+const panel = document.getElementById("panel");
+const settingsBtn = document.getElementById("settingsBtn");
+const topSpace = document.getElementById("topSpace");
+const bottomSpace = document.getElementById("bottomSpace");
+
+let offset = 0, playing = false, dragging = false, startY, startOffset;
+let animationFrameId;
+
+/* SPACERS */
+function setSpacers() {
+  const h = scrollArea.offsetHeight / 2;
+  topSpace.style.height = (h - 60) + "px"; // Offset slightly for aesthetics
+  bottomSpace.style.height = h + "px";
+}
+
+/* FOCUS MATH */
+/* FOCUS MATH */
+function updateFocus() {
+  const center = scrollArea.offsetHeight / 2;
+  
+  list.querySelectorAll(".mantra-card").forEach(card => {
+    // Calculate position relative to the scroll container
+    const cardCenter = card.offsetTop + (card.offsetHeight / 2) - offset;
+    const dist = Math.abs(center - cardCenter);
+    
+    // Spread the falloff over a larger distance to make the slope gentler
+    const maxDist = scrollArea.offsetHeight; 
+    const ratio = Math.max(0, 1 - (dist / maxDist));
+    
+    // Smooth, subtle changes: 
+    // Opacity goes from 0.6 (very readable) to 1.0
+    // Scale goes from 0.96 (barely smaller) to 1.02
+    card.style.transform = `scale(${0.96 + (ratio * 0.06)})`;
+    card.style.opacity = 0.6 + (ratio * 0.4);
+    
+    // Apply the subtle primary color when it's near the center
+    if(dist < 70) {
+      card.classList.add("focused");
+    } else {
+      card.classList.remove("focused");
+    }
+  });
+}
+function apply() {
+  list.style.transform = `translateY(-${offset}px)`;
+  updateFocus();
+}
+
+/* AUTO ANIMATION */
+function animate() {
+  if(!playing || dragging) return;
+  
+  // Speed multiplier
+  offset += speed.value * 0.25; 
+  
+  const max = list.scrollHeight - scrollArea.offsetHeight;
+  if(offset >= max) {
+    offset = max;
+    playing = false;
+    playIcon.innerText = "↻";
+    playText.innerText = "Restart";
+    apply();
+    return;
+  }
+  
+  apply();
+  animationFrameId = requestAnimationFrame(animate);
+}
+
+playBtn.onclick = () => {
+  if(!playing && playText.innerText === "Restart") {
+    offset = 0;
+  }
+  
+  playing = !playing;
+  
+  if(playing) {
+    playIcon.innerText = "⏸";
+    playText.innerText = "Pause";
+    animate();
+  } else {
+    playIcon.innerText = "▶";
+    playText.innerText = "Resume";
+    cancelAnimationFrame(animationFrameId);
+  }
+};
+
+/* DRAG TO SCROLL */
+scrollArea.addEventListener('pointerdown', e => {
+  dragging = true;
+  startY = e.clientY;
+  startOffset = offset;
+  scrollArea.style.cursor = 'grabbing';
+});
+
+window.addEventListener('pointermove', e => {
+  if(!dragging) return;
+  
+  const deltaY = e.clientY - startY;
+  offset = startOffset - deltaY;
+  
+  // Clamp scrolling
+  const max = list.scrollHeight - scrollArea.offsetHeight;
+  if(offset < 0) offset = 0;
+  if(offset > max) offset = max;
+  
+  apply();
+});
+
+window.addEventListener('pointerup', () => {
+  if(dragging) {
+    dragging = false;
+    scrollArea.style.cursor = 'default';
+    if(playing) animate(); // Resume if it was playing
+  }
+});
+
+/* SETTINGS PANEL LOGIC */
+settingsBtn.onclick = e => {
+  e.stopPropagation();
+  panel.classList.toggle("show");
+};
+
+document.addEventListener("click", e => {
+  if(!panel.contains(e.target) && !settingsBtn.contains(e.target)){
+    panel.classList.remove("show");
+  }
+});
+
+/* UPDATE LABELS */
+function updateLabels() {
+  const fVal = fontSlider.value;
+  document.getElementById('fontVal').innerText = fVal < 18 ? 'Small' : fVal > 28 ? 'Large' : 'Medium';
+  
+  const sVal = speed.value;
+  document.getElementById('speedVal').innerText = sVal < 4 ? 'Slow' : sVal > 7 ? 'Fast' : 'Normal';
+}
+
+/* LOCAL STORAGE & INIT */
+window.onload = () => {
+  setSpacers();
+  
+  const savedFont = localStorage.getItem("fontSize") || 24;
+  const savedSpeed = localStorage.getItem("speed") || 5;
+  const savedTheme = localStorage.getItem("theme");
+  
+  fontSlider.value = savedFont;
+  speed.value = savedSpeed;
+  document.documentElement.style.setProperty("--fontScale", savedFont / 24);
+  
+  if(savedTheme === "light") {
+    document.body.classList.add("light");
+    darkToggle.classList.add("active");
+  }
+  
+  updateLabels();
+  apply(); // Initial render
+};
+
+/* HANDLE RESIZE */
+window.onresize = () => {
+  setSpacers();
+  apply();
+};
+
+/* EVENT LISTENERS FOR SLIDERS */
+fontSlider.oninput = e => {
+  const v = e.target.value;
+  document.documentElement.style.setProperty("--fontScale", v / 24);
+  localStorage.setItem("fontSize", v);
+  updateLabels();
+  setTimeout(apply, 50); // Small delay to let DOM update heights
+};
+
+speed.oninput = e => {
+  localStorage.setItem("speed", e.target.value);
+  updateLabels();
+};
+
+/* THEME TOGGLE */
+darkToggle.onclick = () => {
+  darkToggle.classList.toggle("active");
+  document.body.classList.toggle("light");
+  localStorage.setItem(
+    "theme",
+    document.body.classList.contains("light") ? "light" : "dark"
+  );
+};
+/* REGISTER PWA SERVICE WORKER */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('Service Worker registered successfully.'))
+      .catch(err => console.log('Service Worker registration failed:', err));
+  });
+}
+/* INSTALL PWA LOGIC */
+let deferredPrompt;
+const installPopup = document.getElementById('installPopup');
+const installBtn = document.getElementById('installBtn');
+const closeInstallBtn = document.getElementById('closeInstallBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevent the default mini-infobar from appearing on mobile
+  e.preventDefault();
+  
+  // Stash the event so it can be triggered later.
+  deferredPrompt = e;
+  
+  // Show our custom premium UI popup after a short delay
+  setTimeout(() => {
+    installPopup.classList.add('show');
+  }, 1500); 
+});
+
+installBtn.addEventListener('click', async () => {
+  // Hide the custom popup
+  installPopup.classList.remove('show');
+  
+  if (deferredPrompt) {
+    // Show the native browser install prompt
+    deferredPrompt.prompt();
+    
+    // Wait for the user to respond to the prompt
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User response to the install prompt: ${outcome}`);
+    
+    // We've used the prompt, and can't use it again, discard it
+    deferredPrompt = null;
+  }
+});
+
+// Close button logic
+closeInstallBtn.addEventListener('click', () => {
+  installPopup.classList.remove('show');
+});
+
+// If the app successfully installs, hide the popup completely
+window.addEventListener('appinstalled', () => {
+  installPopup.classList.remove('show');
+  deferredPrompt = null;
+  console.log('PWA was successfully installed');
+});
+</script>
+
+</body>
+</html>
