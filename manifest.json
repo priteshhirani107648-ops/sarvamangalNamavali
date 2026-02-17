@@ -1,6 +1,6 @@
 {
   "name": "શ્રી સર્વમંગલ નામાવલી",
-  "short_name": "નામાવલી",
+  "short_name": "શ્રી સર્વમંગલ નામાવલી",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#1a0b2e",
@@ -20,4 +20,5 @@
       "purpose": "any maskable"
     }
   ]
+
 }
