@@ -1550,7 +1550,7 @@ input[type=range]::-webkit-slider-thumb {
   
   <div class="setting-group">
     <label><span>Flow Speed</span> <span id="speedVal">Normal</span></label>
-    <input type="range" id="speed" min="1" max="10" value="5">
+    <input type="range" id="speed" min="1" max="25" value="10">
   </div>
 
   <div class="settings-footer">
@@ -1621,7 +1621,7 @@ function animate() {
   if(!playing || dragging) return;
   
   // Speed multiplier
-  offset += speed.value * 0.25; 
+  offset += speed.value * 0.6; 
   
   const max = list.scrollHeight - scrollArea.offsetHeight;
   if(offset >= max) {
@@ -1815,3 +1815,4 @@ window.addEventListener('appinstalled', () => {
 
 </body>
 </html>
+
